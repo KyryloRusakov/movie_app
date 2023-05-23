@@ -1,31 +1,19 @@
-import './App.css';
-import {useForm} from 'react-hook-form';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import Movies from './pages/Movies';
 
 
 function App() {
-  const {
-    register,
-    formState: {
-      errors,
-    },
-    handleSubmit,
-  } = useForm();
-
-  const onSubmit = (data) => {
-    alert(JSON.stringify(data))
-  }
+  
 
   return (
-    <div className="App">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label>
-          First Name:
-          <input {...register('firstName')} />
-        </label>
-
-        <input type='submit' />
-      </form>
-    </div>
+    <Routes>
+      <Route exact path="/" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/movies" element={<Movies />} />
+    </Routes>
   );
 }
 
