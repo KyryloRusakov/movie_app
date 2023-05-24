@@ -20,35 +20,42 @@ const Login = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label>
-          Email:
-          <input
-            {...register("email", {
-              required: true,
-            })}
-          />
-          {errors.email && <span>{errors.email.message}</span>}
-        </label>
-      </div>
-      <div>
-        <label>
-          Password:
-          <input
-            {...register("password", {
-              required: true,
-            })}
-          />
-          {errors.password && <span>{errors.password.message}</span>}
-        </label>
-      </div>
-
-      <Link to="/signup">Sign In</Link>
-      <button type="submit" onClick={loginHandler}>
-        Log In
-      </button>
-    </form>
+    <div className="container">
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <div className="form-control-wrapper">
+          <label>
+            Email:
+            <input
+              className="form-input"
+              {...register("email", {
+                required: true,
+              })}
+            />
+            {errors.email && <span>{errors.email.message}</span>}
+          </label>
+        </div>
+        <div className="form-control-wrapper">
+          <label>
+            Password:
+            <input
+              className="form-input"
+              {...register("password", {
+                required: true,
+              })}
+            />
+            {errors.password && <span>{errors.password.message}</span>}
+          </label>
+        </div>
+        <div className="form-footer">
+          <Link className="form-link" to="/signup">
+            Sign In
+          </Link>
+          <button className="form-btn" type="submit" onClick={loginHandler}>
+            Log In
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 
