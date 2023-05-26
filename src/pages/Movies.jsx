@@ -21,17 +21,20 @@ const Movies = () => {
     fetchMovies();
   }, []);
 
-  const imageBaseUrl = "https://image.tmdb.org/t/p/w500";
+  const imageBaseUrl = "https://image.tmdb.org/t/p/w300";
 
   return (
-    <div>
-      Movies
-      <ul>
+    <div className="container">
+      <h1 className="movies">Movies</h1>
+      <ul className="movies-list">
         {movies.map((movie) => (
-          <li key={movie.id}>
-            <img src={imageBaseUrl + movie.poster_path} alt={movie.title} />
-            {movie.title}
-            {movie.release_date}
+          <li key={movie.id} className="movies-item">
+            <img
+              className="movies-img"
+              src={imageBaseUrl + movie.poster_path}
+              alt={movie.title}
+            />
+            <span className="movies-title">{movie.title}</span>
           </li>
         ))}
       </ul>
