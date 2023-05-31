@@ -6,14 +6,19 @@ const Movies = () => {
   const [selectedGenre, setSelectedGenre] = useState("");
   const [languages, setLanguages] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
         const apiKey = "fab30af0c86949df3573cee27a305bb0";
-        const response = await fetch(
-          `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`
-        );
+        let apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`;
+
+        if (searchQuery) {
+          apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}`;
+        }
+
+        const response = await fetch(apiUrl);
         const data = await response.json();
         setMovies(data.results);
         console.log(data);
@@ -52,7 +57,7 @@ const Movies = () => {
     fetchMovies();
     fetchGenres();
     fetchLanguages();
-  }, []);
+  }, [searchQuery]);
 
   const imageBaseUrl = "https://image.tmdb.org/t/p/w300";
 
@@ -63,6 +68,10 @@ const Movies = () => {
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
   };
+
+    const handleSearchInputChange = (event) => {
+      setSearchQuery(event.target.value);
+    };
 
   const filteredMovies = movies.filter((movie) => {
     if (selectedGenre && selectedLanguage) {
@@ -117,6 +126,19 @@ const Movies = () => {
               </option>
             ))}
           </select>
+        </div>
+        <div className="movies-search-wrapper">
+          <label htmlFor="search" className="movies-label">
+            Search:
+          </label>
+          <input
+            type="text"
+            id="search"
+            value={searchQuery}
+            onChange={handleSearchInputChange}
+            placeholder="Enter movie title"
+            className="movies-search"
+          />
         </div>
       </div>
 

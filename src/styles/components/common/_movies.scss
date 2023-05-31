@@ -25,6 +25,7 @@
   border-radius: 4px;
   padding: 4px;
   cursor: pointer;
+  border: 1px solid transparent;
 }
 
 .movies-list {
@@ -48,4 +49,20 @@
   font-size: 20px;
   padding: 0 16px 16px;
   margin-top: auto;
+}
+
+.movies-search-wrapper{
+  margin-left: auto;
+}
+
+.movies-search{
+  color: #282828;
+  font-weight: 400;
+  border-radius: 4px;
+  padding: 4px;
+  border: 1px solid transparent;
+
+  &:focus{
+    border: 1px solid #3cacff;
+  }
 }
