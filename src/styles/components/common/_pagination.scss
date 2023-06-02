@@ -1,0 +1,44 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 48px 0;
+}
+
+.pagination-link {
+  color: #282828;
+  display: flex;
+  font-size: 18px;
+  min-width: 40px;
+  min-height: 40px;
+  align-items: center;
+  line-height: 21px;
+  border-radius: 10px;
+  justify-content: center;
+  background-color: #fff;
+  font-weight: 500;
+
+  &.active {
+    background-color: #ff680a;
+    color: #fff;
+  }
+}
+
+.pagination-icon {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  flex-shrink: 0;
+  user-select: none;
+
+  &.left {
+    transform: rotate(180deg);
+  }
+}
+
+.pagination-ellipsis{
+  padding-top: 8px;
+  letter-spacing: 2px;
+  font-weight: 500;
+  font-size: 18px;
+}

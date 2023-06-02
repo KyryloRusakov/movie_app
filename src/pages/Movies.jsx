@@ -77,73 +77,84 @@ const Movies = () => {
     setSearchQuery(event.target.value);
   };
 
- const handlePageChange = (page) => {
-   setCurrentPage(page);
- };
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
- const renderPageNumbers = () => {
-   const pageNumbers = [];
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
 
-   // Добавляем первую страницу
-   pageNumbers.push(
-     <button
-       key={1}
-       onClick={() => handlePageChange(1)}
-       disabled={currentPage === 1}
-     >
-       1
-     </button>
-   );
+    // Добавляем первую страницу
+    pageNumbers.push(
+      <a
+        key={1}
+        onClick={() => handlePageChange(1)}
+        className={
+          currentPage === 1 ? "pagination-link active" : "pagination-link"
+        }
+      >
+        1
+      </a>
+    );
 
-   // Добавляем страницы между первой и последней
-   let startPage = currentPage - 2;
-   let endPage = currentPage + 2;
+    // Добавляем страницы между первой и последней
+    let startPage = currentPage - 2;
+    let endPage = currentPage + 2;
 
-   if (startPage <= 1) {
-     startPage = 2;
-     endPage = Math.min(startPage + 4, totalPages - 1);
-   }
+    if (startPage <= 1) {
+      startPage = 2;
+      endPage = Math.min(startPage + 5, totalPages - 1);
+    }
 
-   if (endPage >= totalPages) {
-     endPage = totalPages - 1;
-     startPage = Math.max(endPage - 4, 2);
-   }
+    if (endPage >= totalPages) {
+      endPage = totalPages - 1;
+      startPage = Math.max(endPage - 5, 2);
+    }
 
-   if (startPage > 2) {
-     pageNumbers.push(<span key="ellipsis-start">...</span>);
-   }
+    if (startPage > 2) {
+      pageNumbers.push(<span key="ellipsis-start" className="pagination-ellipsis">...</span>);
+    }
 
-   for (let page = startPage; page <= endPage; page++) {
-     pageNumbers.push(
-       <button
-         key={page}
-         onClick={() => handlePageChange(page)}
-         disabled={currentPage === page}
-       >
-         {page}
-       </button>
-     );
-   }
+    for (let page = startPage; page <= endPage; page++) {
+      pageNumbers.push(
+        <a
+          onClick={() => handlePageChange(page)}
+          className={
+            currentPage === page ? "pagination-link active" : "pagination-link"
+          }
+        >
+          {page}
+        </a>
+      );
+    }
 
-   if (endPage < totalPages - 1) {
-     pageNumbers.push(<span key="ellipsis-end">...</span>);
-   }
+    if (endPage < totalPages - 1) {
+      pageNumbers.push(
+        <span key="ellipsis-end" className="pagination-ellipsis">
+          ...
+        </span>
+      );
+    }
 
-   // Добавляем последнюю страницу
-   if (totalPages > 1) {
-     pageNumbers.push(
-       <button
-         key={totalPages}
-         onClick={() => handlePageChange(totalPages)}
-         disabled={currentPage === totalPages}
-       >
-         {totalPages}
-       </button>
-     );
-   }
+    // Добавляем последнюю страницу
+    if (totalPages > 1) {
+      pageNumbers.push(
+        <a
+          key={totalPages}
+          onClick={() => handlePageChange(totalPages)}
+          className={
+            currentPage === totalPages
+              ? "pagination-link active"
+              : "pagination-link"
+          }
+        >
+          {totalPages}
+        </a>
+      );
+    }
 
-   return pageNumbers;
- };
+    return pageNumbers;
+  };
 
   const filteredMovies = movies.filter((movie) => {
     if (selectedGenre && selectedLanguage) {
@@ -227,20 +238,27 @@ const Movies = () => {
         ))}
       </ul>
 
-      <div>
-        <button
+      <div className="pagination">
+        <a
+          // Also works: onClick={ () => { handlePageChange(currentPage - 1); } }
           onClick={handlePageChange.bind(null, currentPage - 1)}
           disabled={currentPage === 1}
+          className="pagination-link"
         >
-          Назад
-        </button>
+          <svg viewBox="0 0 24 24" fill="#282828" class="pagination-icon left">
+            <path d="M9.79461 17.2946C9.40534 16.9053 9.405 16.2743 9.79384 15.8846L13.67 12L9.79384 8.11538C9.405 7.72569 9.40534 7.09466 9.79461 6.70538C10.1842 6.31581 10.8158 6.31581 11.2054 6.70538L16.5 12L11.2054 17.2946C10.8158 17.6842 10.1842 17.6842 9.79461 17.2946Z"></path>
+          </svg>
+        </a>
         {renderPageNumbers()}
-        <button
+        <a
           onClick={handlePageChange.bind(null, currentPage + 1)}
           disabled={currentPage === totalPages}
+          className="pagination-link"
         >
-          Вперед
-        </button>
+          <svg viewBox="0 0 24 24" fill="#282828" class="pagination-icon">
+            <path d="M9.79461 17.2946C9.40534 16.9053 9.405 16.2743 9.79384 15.8846L13.67 12L9.79384 8.11538C9.405 7.72569 9.40534 7.09466 9.79461 6.70538C10.1842 6.31581 10.8158 6.31581 11.2054 6.70538L16.5 12L11.2054 17.2946C10.8158 17.6842 10.1842 17.6842 9.79461 17.2946Z"></path>
+          </svg>
+        </a>
       </div>
     </div>
   );
