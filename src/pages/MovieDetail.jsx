@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const MovieDetail = () => {
   const [movieDetail, setMovieDetail] = useState([]);
   const [movieGenres, setMovieGenres] = useState([]);
+  const [active, setActive] = useState(false);
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -26,8 +28,21 @@ const MovieDetail = () => {
     fetchMovie();
   }, []);
 
-  const imageBaseUrl = "https://image.tmdb.org/t/p/w300";
+  // const [movie, setMovie] = useState(null);
 
+  const addToFavorites = () => {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    favorites.push(movieDetail);
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+    // navigate("/favorites");
+    setActive(!active);
+  };
+
+  // if (!movie) {
+  //   return <p>Loading...</p>;
+  // }
+
+  const imageBaseUrl = "https://image.tmdb.org/t/p/w300";
 
   return (
     <div className="container">
@@ -55,6 +70,26 @@ const MovieDetail = () => {
               {Number(movieDetail.vote_average).toFixed(1)}
             </span>
           </div>
+          <button
+            className={active ? "btn-favorite active" : "btn-favorite"}
+            onClick={addToFavorites}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              class="bi bi-heart"
+              viewBox="0 0 16 16"
+            >
+              {" "}
+              <path
+              fill="white"
+                fill-rule="evenodd"
+                d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                className="icon-favorite"
+              />
+            </svg>
+          </button>
           <div className="movie-detail-overview">{movieDetail.overview}</div>
         </div>
       </div>

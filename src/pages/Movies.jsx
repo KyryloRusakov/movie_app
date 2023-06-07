@@ -175,6 +175,7 @@ const Movies = () => {
   return (
     <div className="container">
       <h1 className="movies">Movies</h1>
+      <Link to="/favorites">Go to Favorites</Link>
       <div className="movies-filter">
         <div>
           <label htmlFor="genre" className="movies-label">
