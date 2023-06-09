@@ -1,22 +1,22 @@
-.movie-detail{
+.movie-detail {
   display: flex;
   justify-content: space-between;
   gap: 32px;
   margin: 36px 0;
 }
 
-.movie-detail-info{
+.movie-detail-info {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.movie-detail-facts{
+.movie-detail-facts {
   display: flex;
   gap: 16px;
 }
 
-.movie-detail-name{
+.movie-detail-name {
   display: inline-block;
   margin-bottom: 16px;
   color: #fff;
@@ -24,34 +24,39 @@
   font-weight: 500;
 }
 
-.movie-detail-genres{
+.movie-detail-genres {
   display: flex;
   gap: 8px;
   color: #eee;
 }
 
-.movie-detail-runtime{
+.movie-detail-runtime {
   color: #fff;
 }
 
-.movie-detail-rate{
+.movie-detail-rate {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 60px;
   height: 60px;
-  margin-top: 36px;
   font-size: 26px;
   background-color: #081c22;
   border-radius: 50%;
 }
 
-.movie-detail-rate-value{
+.movie-detail-rate-value {
   color: #fff;
 }
 
-.movie-detail-overview{
-  margin-top: auto;
+.movie-detail-overview {
+  margin-top: 48px;
   color: #fff;
   font-size: 16px;
+}
+
+.movie-detail-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 36px;
 }

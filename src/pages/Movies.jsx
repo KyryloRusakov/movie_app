@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
+import Header from './../components/Header';
+import MovieList from './../components/Movies';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -174,8 +176,7 @@ const Movies = () => {
 
   return (
     <div className="container">
-      <h1 className="movies">Movies</h1>
-      <Link to="/favorites">Go to Favorites</Link>
+      <Header />
       <div className="movies-filter">
         <div>
           <label htmlFor="genre" className="movies-label">
@@ -227,21 +228,8 @@ const Movies = () => {
           />
         </div>
       </div>
-
-      <ul className="movies-list">
-        {filteredMovies.map((movie) => (
-          <li key={movie.id} className="movies-item">
-            <Link to={`/movie/${movie.id}`}>
-              <img
-                className="movies-img"
-                src={imageBaseUrl + movie.poster_path}
-                alt={movie.title}
-              />
-              <span className="movies-title">{movie.title}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      
+      <MovieList movies={filteredMovies}/>
 
       <div className="pagination">
         <a

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Header from './../components/Header';
+import MovieList from './../components/Movies';
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
@@ -21,28 +23,17 @@ const Favorites = () => {
     setFavorites(storedFavorites);
   }, []);
 
-  const imageBaseUrl = "https://image.tmdb.org/t/p/w300";
-
-  // const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-  // favorites.push(favoriteMovies)
-  // console.log(favorites);
+  // const imageBaseUrl = "https://image.tmdb.org/t/p/w300";
 
   return (
-    <div>
-      <h2>My Favorites</h2>
+    <div className="container">
+      <Header />
+      <h2 className="favorites-title">My Favorites</h2>
       {favorites.length === 0 ? (
         <span>No favorite movies yet.</span>
       ) : (
-        <ul>
-        {favorites.map((movie) => (
-          <li key={movie.id}>
-            <img src={imageBaseUrl + movie.poster_path} alt={movie.title} />
-            <h3>{movie.title}</h3>
-          </li>
-        ))}
-      </ul>
-      )
-      }
+        <MovieList movies={favorites} />
+      )}
     </div>
   );
 };

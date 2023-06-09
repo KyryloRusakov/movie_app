@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const MovieDetail = () => {
   const [movieDetail, setMovieDetail] = useState([]);
   const [movieGenres, setMovieGenres] = useState([]);
-  // const [active, setActive] = useState(false);
-    const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const { id } = useParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -29,8 +27,6 @@ const MovieDetail = () => {
     fetchMovie();
   }, [id]);
 
-  // const [movie, setMovie] = useState(null);
-
   useEffect(() => {
     // Проверка наличия фильма в списке выбранных при загрузке страницы
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -40,15 +36,10 @@ const MovieDetail = () => {
         return favMovie.id === +id}
       );
       setIsFavorite(isMovieInFavorites);
-      console.log(isMovieInFavorites);
-      console.log(favorites);
-      console.log(id);
-
   }, [id]);
 
   const addToFavorites = () => {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    console.log(favorites);
 
     if (isFavorite) {
       // Удаление фильма из списка выбранных
@@ -92,34 +83,33 @@ const MovieDetail = () => {
             </div>
             <div className="movie-detail-runtime">{movieDetail.runtime}m</div>
           </div>
-          <div className="movie-detail-rate">
-            <span className="movie-detail-rate-value">
-              {Number(movieDetail.vote_average).toFixed(1)}
-            </span>
-          </div>
-          {/* <button
-            className={active ? "btn-favorite active" : "btn-favorite"}
-            onClick={addToFavorites}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              class="bi bi-heart"
-              viewBox="0 0 16 16"
+          <div className="movie-detail-actions">
+            <div className="movie-detail-rate">
+              <span className="movie-detail-rate-value">
+                {Number(movieDetail.vote_average).toFixed(1)}
+              </span>
+            </div>
+            <button
+              className={isFavorite ? "btn-favorite active" : "btn-favorite"}
+              onClick={addToFavorites}
             >
-              {" "}
-              <path
-                fill="white"
-                fill-rule="evenodd"
-                d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-                className="icon-favorite"
-              />
-            </svg>
-          </button> */}
-          <button onClick={addToFavorites}>
-            {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                class="bi bi-heart"
+                viewBox="0 0 16 16"
+              >
+                {" "}
+                <path
+                  fill="white"
+                  fill-rule="evenodd"
+                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                  className="icon-favorite"
+                />
+              </svg>
+            </button>
+          </div>
           <div className="movie-detail-overview">{movieDetail.overview}</div>
         </div>
       </div>
