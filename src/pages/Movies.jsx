@@ -1,42 +1,49 @@
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
-import Header from './../components/Header';
-import MovieList from './../components/Movies';
+import { Link } from "react-router-dom";
+import Header from "./../components/Header";
+import MovieList from "../components/MoviesList";
 import FilterGenres from "../components/Filters/FilterGenres";
 import FilterLanguages from "../components/Filters/FilterLanguages";
-import Search from './../components/Search';
-import Pagination from './../components/Pagination';
+import Search from "./../components/Search";
+import Pagination from "./../components/Pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMovies } from "./../store/movieSlice";
 
 const Movies = () => {
-  const [movies, setMovies] = useState([]);
+  // const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState("");
   const [languages, setLanguages] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
+  // const [totalPages, setTotalPages] = useState(0);
+
+  const dispatch = useDispatch();
+
+  const totalPages = 500;
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const apiKey = "fab30af0c86949df3573cee27a305bb0";
-        let apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${currentPage}`;
+    dispatch(fetchMovies(currentPage, searchQuery));
+    // const fetchMovies = async () => {
+    //   try {
+    //     const apiKey = "fab30af0c86949df3573cee27a305bb0";
+    //     let apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${currentPage}`;
 
-        if (searchQuery) {
-          apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}&page=${currentPage}`;
-        }
+    //     if (searchQuery) {
+    //       apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}&page=${currentPage}`;
+    //     }
 
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        setMovies(data.results);
-        //setTotalPages(data.total_pages) max 500 pages, but total_pages = 38545;
-        setTotalPages(500);
-        console.log(data);
-      } catch (error) {
-        console.error("Ошибка при получении списка фильмов:", error);
-      }
-    };
+    //     const response = await fetch(apiUrl);
+    //     const data = await response.json();
+    //     setMovies(data.results);
+    //     //setTotalPages(data.total_pages) max 500 pages, but total_pages = 38545;
+    //     setTotalPages(500);
+    //     console.log(data);
+    //   } catch (error) {
+    //     console.error("Ошибка при получении списка фильмов:", error);
+    //   }
+    // };
 
     const fetchGenres = async () => {
       try {
@@ -65,10 +72,10 @@ const Movies = () => {
       }
     };
 
-    fetchMovies();
+    // fetchMovies();
     fetchGenres();
     fetchLanguages();
-  }, [searchQuery, currentPage]);
+  }, [searchQuery, currentPage, dispatch]);
 
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
@@ -83,8 +90,10 @@ const Movies = () => {
   };
 
   const handlePageChange = (page) => {
-    setCurrentPage(page);
+    dispatch(fetchMovies(page, searchQuery));
   };
+
+  const movies = useSelector(state => state.movies.movies)
 
   const filteredMovies = movies.filter((movie) => {
     if (selectedGenre && selectedLanguage) {
@@ -99,6 +108,7 @@ const Movies = () => {
     }
     return true;
   });
+
 
   return (
     <div className="container">
