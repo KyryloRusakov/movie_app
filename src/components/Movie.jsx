@@ -5,7 +5,7 @@ const Movie = ({movie}) => {
   const imageBaseUrl = "https://image.tmdb.org/t/p/w300";
 
   return (
-    <li key={movie.id} className="movies-item">
+    <li className="movies-item">
       <Link to={`/movie/${movie.id}`}>
         <img
           className="movies-img"
