@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setMovieDetail,
+  addToFavorites,
+  removeFromFavorites,
+} from "../store/movieSlice";
 
 const MovieDetail = () => {
-  const [movieDetail, setMovieDetail] = useState([]);
-  const [movieGenres, setMovieGenres] = useState([]);
-  const [isFavorite, setIsFavorite] = useState(false);
+   const dispatch = useDispatch();
+   const { movieDetail, favorites, genres } = useSelector((state) => state.movies);
+   const { id } = useParams();
+   const isFavorite = favorites.some((favMovie) => favMovie.id === +id);
 
-  const { id } = useParams();
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -16,8 +22,7 @@ const MovieDetail = () => {
 
         const response = await fetch(apiUrl);
         const data = await response.json();
-        setMovieDetail(data);
-        setMovieGenres(data.genres);
+        dispatch(setMovieDetail(data));
         console.log(data);
       } catch (error) {
         console.error("Error when fetching details:", error);
@@ -25,42 +30,51 @@ const MovieDetail = () => {
     };
 
     fetchMovie();
-  }, [id]);
+  }, [dispatch, id]);
 
-  useEffect(() => {
-    // Проверка наличия фильма в списке выбранных при загрузке страницы
-    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    const isMovieInFavorites = favorites.some(
-      (favMovie) =>       {
-        console.log(favMovie.id) 
-        return favMovie.id === +id}
-      );
-      setIsFavorite(isMovieInFavorites);
-  }, [id]);
+  // useEffect(() => {
+  //   // Проверка наличия фильма в списке выбранных при загрузке страницы
+  //   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  //   const isMovieInFavorites = favorites.some(
+  //     (favMovie) =>       {
+  //       console.log(favMovie.id) 
+  //       return favMovie.id === +id}
+  //     );
+  //     setIsFavorite(isMovieInFavorites);
+  // }, [id]);
 
-  const addToFavorites = () => {
-    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  // const addToFavorites = () => {
+  //   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
+  //   if (isFavorite) {
+  //     // Удаление фильма из списка выбранных
+  //     const updatedFavorites = favorites.filter(
+  //       (favMovie) => favMovie.id !== movieDetail.id
+  //     );
+  //     setIsFavorite(false);
+  //     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  //   } else {
+  //     // Добавление фильма в список выбранных
+  //     favorites.push(movieDetail);
+  //     setIsFavorite(true);
+  //     localStorage.setItem("favorites", JSON.stringify(favorites));
+  //   }
+  // };
+
+  const addToFavoritesHandler = () => {
     if (isFavorite) {
-      // Удаление фильма из списка выбранных
-      const updatedFavorites = favorites.filter(
-        (favMovie) => favMovie.id !== movieDetail.id
-      );
-      setIsFavorite(false);
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      dispatch(removeFromFavorites(movieDetail));
     } else {
-      // Добавление фильма в список выбранных
-      favorites.push(movieDetail);
-      setIsFavorite(true);
-      localStorage.setItem("favorites", JSON.stringify(favorites));
+      dispatch(addToFavorites(movieDetail));
     }
   };
 
-  // if (!movie) {
-  //   return <p>Loading...</p>;
-  // }
 
   const imageBaseUrl = "https://image.tmdb.org/t/p/w300";
+
+    if (!movieDetail) {
+      return <div>Загрузка...</div>;
+    }
 
   return (
     <div className="container">
@@ -74,10 +88,10 @@ const MovieDetail = () => {
           <span className="movie-detail-name">{movieDetail.title}</span>
           <div className="movie-detail-facts">
             <div className="movie-detail-genres">
-              {movieGenres.map((genre, index) => (
+              {genres.map((genre, index) => (
                 <span key={genre.id}>
                   {genre.name}
-                  {index === movieGenres.length - 1 ? "" : ","}
+                  {index === genres.length - 1 ? "" : ","}
                 </span>
               ))}
             </div>
@@ -91,7 +105,7 @@ const MovieDetail = () => {
             </div>
             <button
               className={isFavorite ? "btn-favorite active" : "btn-favorite"}
-              onClick={addToFavorites}
+              onClick={addToFavoritesHandler}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -19,7 +19,6 @@ import {
 const Movies = () => {
   const dispatch = useDispatch();
   const {
-    movies,
     genres,
     languages,
     selectedGenre,
@@ -78,19 +77,7 @@ const Movies = () => {
     dispatch(setCurrentPage(page));
   };
 
-  const filteredMovies = movies.filter((movie) => {
-    if (selectedGenre && selectedLanguage) {
-      return (
-        movie.genre_ids.includes(parseInt(selectedGenre)) &&
-        movie.original_language === selectedLanguage
-      );
-    } else if (selectedGenre) {
-      return movie.genre_ids.includes(parseInt(selectedGenre));
-    } else if (selectedLanguage) {
-      return movie.original_language === selectedLanguage;
-    }
-    return true;
-  });
+  
 
   return (
     <div className="container">
@@ -111,7 +98,7 @@ const Movies = () => {
           handleSearchInputChange={handleSearchInputChange}
         />
       </div>
-      <MoviesList movies={filteredMovies} />
+      <MoviesList />
       <Pagination
         handlePageChange={handlePageChange}
         currentPage={currentPage}

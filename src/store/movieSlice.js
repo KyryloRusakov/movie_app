@@ -1,57 +1,3 @@
-// import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-// export const fetchMovies = createAsyncThunk(
-//   "movies/fetchMovies",
-//   async function () {
-//     const apiKey = "fab30af0c86949df3573cee27a305bb0";
-//     let apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`;
-
-//     // if (searchQuery) {
-//     //   apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}&page=${currentPage}`;
-//     // }
-
-//     const response = await fetch(apiUrl);
-//     const data = await response.json();
-//     console.log(data);
-//     return data;
-//   }
-// );
-
-// const movieSlice = createSlice({
-//   name: "movies",
-//   initialState: {
-//     movies: [],
-//     loading: false,
-//     error: null,
-//   },
-//   reducers: {
-//     // fetchMovies(state, action) {
-//     //   console.log(state);
-//     //   console.log(action);
-//     // },
-//     // fetchGenres() {},
-//     // fetchLanguages() {},
-//   },
-//   extraReducers: (builder) => {
-//     builder
-//       .addCase(fetchMovies.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(fetchMovies.fulfilled, (state, action) => {
-//         state.movies = action.payload;
-//         state.loading = false;
-//       })
-//       .addCase(fetchMovies.rejected, (state, action) => {
-//         state.error = action.error.message;
-//         state.loading = false;
-//       });
-//   },
-// });
-
-// //fetchMovies
-// // export const {  fetchGenres, fetchLanguages } = movieSlice.actions;
-
-// export default movieSlice.reducer;
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchMovies = createAsyncThunk(
@@ -83,6 +29,8 @@ const moviesSlice = createSlice({
     searchQuery: "",
     currentPage: 1,
     totalPages: 500,
+    movieDetail: null,
+    favorites: [],
   },
   reducers: {
     setGenres: (state, action) => {
@@ -102,6 +50,19 @@ const moviesSlice = createSlice({
     },
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
+    },
+    setMovieDetail: (state, action) => {
+      state.movieDetail = action.payload;
+    },
+
+    addToFavorites: (state, action) => {
+      state.favorites.push(action.payload);
+    },
+
+    removeFromFavorites: (state, action) => {
+      state.favorites = state.favorites.filter(
+        (favMovie) => favMovie.id !== action.payload.id
+      );
     },
   },
   extraReducers: (builder) => {
@@ -127,6 +88,9 @@ export const {
   setSelectedLanguage,
   setSearchQuery,
   setCurrentPage,
+  setMovieDetail,
+  addToFavorites,
+  removeFromFavorites,
 } = moviesSlice.actions;
 
 export default moviesSlice.reducer;

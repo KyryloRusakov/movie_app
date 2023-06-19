@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Header from "./../components/Header";
 import MovieList from "../components/MoviesList";
+import { useSelector } from "react-redux";
 
 const Favorites = () => {
-  const [favorites, setFavorites] = useState([]);
+  const { favorites } = useSelector((state) => state.movies);
 
   // Функция для добавления фильма в список выбранных
   // const addToFavorites = (movie) => {
@@ -17,11 +18,11 @@ const Favorites = () => {
   //   );
   // };
 
-  useEffect(() => {
-    // Получение данных из localStorage
-    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    setFavorites(storedFavorites);
-  }, []);
+  // useEffect(() => {
+  //   // Получение данных из localStorage
+  //   const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  //   setFavorites(storedFavorites);
+  // }, []);
 
   // const imageBaseUrl = "https://image.tmdb.org/t/p/w300";
 
