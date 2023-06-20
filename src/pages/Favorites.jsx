@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Header from "./../components/Header";
-import MovieList from "../components/MoviesList";
+import MoviesFavoriteList from "../components/MoviesFavoriteList";
 import { useSelector } from "react-redux";
 
 const Favorites = () => {
+  // const [storedFavorites, setFavorites] = useState([]);  
   const { favorites } = useSelector((state) => state.movies);
 
   // Функция для добавления фильма в список выбранных
@@ -33,7 +34,7 @@ const Favorites = () => {
       {favorites.length === 0 ? (
         <span>No favorite movies yet.</span>
       ) : (
-        <MovieList movies={favorites} />
+        <MoviesFavoriteList movies={favorites} />
       )}
     </div>
   );

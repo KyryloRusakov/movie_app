@@ -88,7 +88,7 @@ const MovieDetail = () => {
           <span className="movie-detail-name">{movieDetail.title}</span>
           <div className="movie-detail-facts">
             <div className="movie-detail-genres">
-              {genres.map((genre, index) => (
+              {movieDetail.genres.map((genre, index) => (
                 <span key={genre.id}>
                   {genre.name}
                   {index === genres.length - 1 ? "" : ","}

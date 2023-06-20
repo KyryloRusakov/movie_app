@@ -54,15 +54,21 @@ const moviesSlice = createSlice({
     setMovieDetail: (state, action) => {
       state.movieDetail = action.payload;
     },
-
     addToFavorites: (state, action) => {
+      const storedFavorites =
+        JSON.parse(localStorage.getItem("favorites")) || [];
+      const updatedFavorites = [...storedFavorites, action.payload];
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
       state.favorites.push(action.payload);
     },
-
     removeFromFavorites: (state, action) => {
-      state.favorites = state.favorites.filter(
+      const storedFavorites =
+        JSON.parse(localStorage.getItem("favorites")) || [];
+      const updatedFavorites = storedFavorites.filter(
         (favMovie) => favMovie.id !== action.payload.id
       );
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      state.favorites = updatedFavorites;
     },
   },
   extraReducers: (builder) => {
