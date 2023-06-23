@@ -12,6 +12,7 @@ export const fetchMovies = createAsyncThunk(
 
     const response = await fetch(apiUrl);
     const data = await response.json();
+    // console.log(data);
     return data.results;
   }
 );

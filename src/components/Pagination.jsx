@@ -17,7 +17,7 @@ const Pagination = ({ handlePageChange, currentPage, totalPages }) => {
        </a>
      );
 
-     // Добавляем страницы между первой и последней
+     // Добавляем страaицы между первой и последней
      let startPage = currentPage - 2;
      let endPage = currentPage + 2;
 

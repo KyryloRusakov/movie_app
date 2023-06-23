@@ -77,8 +77,6 @@ const Movies = () => {
     dispatch(setCurrentPage(page));
   };
 
-  
-
   return (
     <div className="container">
       <Header />

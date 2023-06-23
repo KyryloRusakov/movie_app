@@ -1,14 +1,12 @@
 import React from "react";
-import Movie from './Movie';
+import Movie from "./Movie";
 import { useSelector } from "react-redux";
 
 const MovieList = () => {
   // const movies = useSelector(state => state.movies.movies);
-  const {
-    movies,
-    selectedGenre,
-    selectedLanguage,
-  } = useSelector((state) => state.movies);
+  const { movies, selectedGenre, selectedLanguage } = useSelector(
+    (state) => state.movies
+  );
 
   const filteredMovies = movies.filter((movie) => {
     if (selectedGenre && selectedLanguage) {
@@ -23,7 +21,6 @@ const MovieList = () => {
     }
     return true;
   });
-
 
   return (
     <ul className="movies-list">
