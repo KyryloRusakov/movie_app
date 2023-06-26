@@ -15,6 +15,7 @@ import {
   setSearchQuery,
   setCurrentPage,
 } from "./../store/movieSlice";
+import { API_KEY, BASE_URL } from "../constants/constants";
 
 const Movies = () => {
   const dispatch = useDispatch();
@@ -29,14 +30,12 @@ const Movies = () => {
   } = useSelector((state) => state.movies);
 
   useEffect(() => {
-    const apiKey = "fab30af0c86949df3573cee27a305bb0";
-
-    dispatch(fetchMovies({ apiKey, currentPage, searchQuery }));
+    dispatch(fetchMovies({ API_KEY, currentPage, searchQuery }));
 
     const fetchGenres = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`
+          `${BASE_URL}/genre/movie/list?api_key=${API_KEY}`
         );
         const data = await response.json();
         dispatch(setGenres(data.genres));
@@ -48,7 +47,7 @@ const Movies = () => {
     const fetchLanguages = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/configuration/languages?api_key=${apiKey}`
+          `${BASE_URL}/configuration/languages?api_key=${API_KEY}`
         );
         const data = await response.json();
         dispatch(setLanguages(data));
