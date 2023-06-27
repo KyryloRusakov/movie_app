@@ -10,8 +10,6 @@ import {
   fetchMovies,
   setGenres,
   setLanguages,
-  setSelectedGenre,
-  setSelectedLanguage,
   setSearchQuery,
   setCurrentPage,
 } from "./../store/movieSlice";
@@ -30,7 +28,15 @@ const Movies = () => {
   } = useSelector((state) => state.movies);
 
   useEffect(() => {
-    dispatch(fetchMovies({ API_KEY, currentPage, searchQuery }));
+    dispatch(
+      fetchMovies({
+        API_KEY,
+        currentPage,
+        searchQuery,
+        selectedGenre,
+        selectedLanguage,
+      })
+    );
 
     const fetchGenres = async () => {
       try {
@@ -58,15 +64,7 @@ const Movies = () => {
 
     fetchGenres();
     fetchLanguages();
-  }, [dispatch, currentPage, searchQuery]);
-
-  const handleGenreChange = (event) => {
-    dispatch(setSelectedGenre(event.target.value));
-  };
-
-  const handleLanguageChange = (event) => {
-    dispatch(setSelectedLanguage(event.target.value));
-  };
+  }, [dispatch, currentPage, searchQuery, selectedGenre, selectedLanguage]);
 
   const handleSearchInputChange = (event) => {
     dispatch(setSearchQuery(event.target.value));
@@ -80,15 +78,10 @@ const Movies = () => {
     <div className="container">
       <Header />
       <div className="movies-filter">
-        <FilterGenres
-          genres={genres}
-          selectedGenre={selectedGenre}
-          handleGenreChange={handleGenreChange}
-        />
+        <FilterGenres genres={genres} selectedGenre={selectedGenre} />
         <FilterLanguages
           languages={languages}
           selectedLanguage={selectedLanguage}
-          handleLanguageChange={handleLanguageChange}
         />
         <Search
           searchQuery={searchQuery}

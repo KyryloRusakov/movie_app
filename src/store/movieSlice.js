@@ -1,24 +1,36 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from 'axios';
+import axios from "axios";
 import { BASE_URL } from "../constants/constants.js";
 
 export const fetchMovies = createAsyncThunk(
   "movies/fetchMovies",
   async (params) => {
-    const { API_KEY, currentPage, searchQuery } = params;
+    const {
+      API_KEY,
+      currentPage,
+      searchQuery,
+      selectedGenre,
+      selectedLanguage,
+    } = params;
     let apiUrl = `${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${currentPage}`;
 
     if (searchQuery) {
       apiUrl = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${searchQuery}&page=${currentPage}`;
+    } else if (selectedGenre && selectedLanguage) {
+      apiUrl = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${selectedGenre}&with_original_language=${selectedLanguage}&page=${currentPage}`;
+    } else if (selectedGenre) {
+      apiUrl = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${selectedGenre}&page=${currentPage}`;
+    } else if (selectedLanguage) {
+      apiUrl = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_original_language=${selectedLanguage}&page=${currentPage}`;
     }
 
-     try {
-       const response = await axios.get(apiUrl);
-       return response.data.results;
-     } catch (error) {
-       console.error("Ошибка при получении фильмов:", error);
-       throw error;
-     }
+    try {
+      const response = await axios.get(apiUrl);
+      return response.data.results;
+    } catch (error) {
+      console.error("Ошибка при получении фильмов:", error);
+      throw error;
+    }
   }
 );
 

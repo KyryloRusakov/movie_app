@@ -1,6 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setSelectedLanguage } from "../../store/movieSlice";
 
-const Filter = ({ selectedLanguage, handleLanguageChange, languages }) => {
+const Filter = ({ selectedLanguage, languages }) => {
+  const dispatch = useDispatch();
+
+  const handleLanguageChange = (event) => {
+    dispatch(setSelectedLanguage(event.target.value));
+  };
+
   return (
     <div>
       <label htmlFor="language" className="movies-label">
