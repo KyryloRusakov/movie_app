@@ -1,19 +1,36 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+import { BASE_URL } from "../constants/constants.js";
 
 export const fetchMovies = createAsyncThunk(
   "movies/fetchMovies",
   async (params) => {
-    const { apiKey, currentPage, searchQuery } = params;
-    let apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${currentPage}`;
+    const {
+      API_KEY,
+      currentPage,
+      searchQuery,
+      selectedGenre,
+      selectedLanguage,
+    } = params;
+    let apiUrl = `${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${currentPage}`;
 
     if (searchQuery) {
-      apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}&page=${currentPage}`;
+      apiUrl = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${searchQuery}&page=${currentPage}`;
+    } else if (selectedGenre && selectedLanguage) {
+      apiUrl = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${selectedGenre}&with_original_language=${selectedLanguage}&page=${currentPage}`;
+    } else if (selectedGenre) {
+      apiUrl = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${selectedGenre}&page=${currentPage}`;
+    } else if (selectedLanguage) {
+      apiUrl = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_original_language=${selectedLanguage}&page=${currentPage}`;
     }
 
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-    // console.log(data);
-    return data.results;
+    try {
+      const response = await axios.get(apiUrl);
+      return response.data.results;
+    } catch (error) {
+      console.error("Ошибка при получении фильмов:", error);
+      throw error;
+    }
   }
 );
 

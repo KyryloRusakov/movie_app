@@ -1,6 +1,14 @@
-import React from 'react'
+import React from "react";
+import { useDispatch } from "react-redux";
+import { setSelectedGenre } from "../../store/movieSlice";
 
-const Filter = ({ selectedGenre, handleGenreChange, genres }) => {
+const Filter = ({ selectedGenre, genres }) => {
+  const dispatch = useDispatch();
+
+  const handleGenreChange = (event) => {
+    dispatch(setSelectedGenre(event.target.value));
+  };
+
   return (
     <div>
       <label htmlFor="genres" className="movies-label">
@@ -23,4 +31,4 @@ const Filter = ({ selectedGenre, handleGenreChange, genres }) => {
   );
 };
 
-export default Filter
+export default Filter;
