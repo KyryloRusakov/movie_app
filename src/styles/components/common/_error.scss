@@ -1,0 +1,37 @@
+.error{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.error-title{
+  margin: 48px 0;
+  font-size: 48px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.error-button{
+  width: 220px;
+  color: #282828;
+  display: flex;
+  font-size: 18px;
+  min-width: 40px;
+  min-height: 40px;
+  align-items: center;
+  line-height: 18px;
+  border-radius: 10px;
+  justify-content: center;
+  background-color: #fff;
+  font-weight: 500;
+  border: none;
+  transition: all 0.2s ease;
+
+  &:hover{
+    color: #ff680a;
+    background-color: #282828;
+  }
+}
