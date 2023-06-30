@@ -14,6 +14,7 @@ import {
   setCurrentPage,
 } from "./../store/movieSlice";
 import { API_KEY, BASE_URL } from "../constants/constants";
+import Loader from './../components/Loader';
 
 const Movies = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const Movies = () => {
     searchQuery,
     currentPage,
     totalPages,
+    loading,
   } = useSelector((state) => state.movies);
 
   useEffect(() => {
@@ -77,24 +79,30 @@ const Movies = () => {
   return (
     <div className="container">
       <Header />
-      <div className="movies-filter">
-        <FilterGenres genres={genres} selectedGenre={selectedGenre} />
-        <FilterLanguages
-          languages={languages}
-          selectedLanguage={selectedLanguage}
+        {loading ? (
+        <Loader /> // Отобразите Loader, если загрузка контента
+      ) : (
+        <>
+          <div className="movies-filter">
+          <FilterGenres genres={genres} selectedGenre={selectedGenre} />
+          <FilterLanguages
+            languages={languages}
+            selectedLanguage={selectedLanguage}
+          />
+          <Search
+            searchQuery={searchQuery}
+            handleSearchInputChange={handleSearchInputChange}
+          />
+        </div>
+        <MoviesList />
+        <Pagination
+          handlePageChange={handlePageChange}
+          currentPage={currentPage}
+          totalPages={totalPages}
         />
-        <Search
-          searchQuery={searchQuery}
-          handleSearchInputChange={handleSearchInputChange}
-        />
+        </>
+      )}
       </div>
-      <MoviesList />
-      <Pagination
-        handlePageChange={handlePageChange}
-        currentPage={currentPage}
-        totalPages={totalPages}
-      />
-    </div>
   );
 };
 
