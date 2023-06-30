@@ -88,6 +88,9 @@ const moviesSlice = createSlice({
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
       state.favorites = updatedFavorites;
     },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
