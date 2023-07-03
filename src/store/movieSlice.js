@@ -48,7 +48,7 @@ const moviesSlice = createSlice({
     currentPage: 1,
     totalPages: 500,
     movieDetail: null,
-    favorites: [],
+    favorites: JSON.parse(localStorage.getItem("favorites")) || [],
   },
   reducers: {
     setGenres: (state, action) => {
@@ -73,16 +73,12 @@ const moviesSlice = createSlice({
       state.movieDetail = action.payload;
     },
     addToFavorites: (state, action) => {
-      const storedFavorites =
-        JSON.parse(localStorage.getItem("favorites")) || [];
-      const updatedFavorites = [...storedFavorites, action.payload];
+      const updatedFavorites = [...state.favorites, action.payload];
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-      state.favorites.push(action.payload);
+      state.favorites = updatedFavorites;
     },
     removeFromFavorites: (state, action) => {
-      const storedFavorites =
-        JSON.parse(localStorage.getItem("favorites")) || [];
-      const updatedFavorites = storedFavorites.filter(
+      const updatedFavorites = state.favorites.filter(
         (favMovie) => favMovie.id !== action.payload.id
       );
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));

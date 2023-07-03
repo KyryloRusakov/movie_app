@@ -12,9 +12,8 @@ const MovieDetail = () => {
    const dispatch = useDispatch();
    const { movieDetail, favorites, genres } = useSelector((state) => state.movies);
    const { id } = useParams();
-   const isFavorite = favorites.some((favMovie) => favMovie.id === +id);
    const [loadingPoster, setLoadingPoster] = useState(true);
-
+   const isFavorite = favorites.some((favMovie) => favMovie.id === +id);
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -28,7 +27,6 @@ const MovieDetail = () => {
         dispatch(setMovieDetail(data));
         console.log(data);
         setLoadingPoster(false);
-
       } catch (error) {
         console.error("Error when fetching details:", error);
       }
