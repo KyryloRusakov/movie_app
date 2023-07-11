@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "./../components/Header";
 import MoviesList from "../components/MoviesList";
@@ -14,7 +14,7 @@ import {
   setCurrentPage,
 } from "./../store/movieSlice";
 import { API_KEY, BASE_URL } from "../constants/constants";
-import Loader from './../components/Loader';
+import Loader from "../components/Loader";
 
 const Movies = () => {
   const dispatch = useDispatch();
@@ -68,9 +68,12 @@ const Movies = () => {
     fetchLanguages();
   }, [dispatch, currentPage, searchQuery, selectedGenre, selectedLanguage]);
 
-  const handleSearchInputChange = (event) => {
-    dispatch(setSearchQuery(event.target.value));
-  };
+  const handleSearchInputChange = useCallback(
+    (event) => {
+      dispatch(setSearchQuery(event.target.value));
+    },
+    [dispatch]
+  );
 
   const handlePageChange = (page) => {
     dispatch(setCurrentPage(page));
@@ -79,30 +82,30 @@ const Movies = () => {
   return (
     <div className="container">
       <Header />
-        {loading ? (
-        <Loader /> // Отобразите Loader, если загрузка контента
+      <div className="movies-filter">
+        <FilterGenres genres={genres} selectedGenre={selectedGenre} />
+        <FilterLanguages
+          languages={languages}
+          selectedLanguage={selectedLanguage}
+        />
+        <Search
+          searchQuery={searchQuery}
+          handleSearchInputChange={handleSearchInputChange}
+        />
+      </div>
+      {loading ? (
+        <Loader />
       ) : (
         <>
-          <div className="movies-filter">
-          <FilterGenres genres={genres} selectedGenre={selectedGenre} />
-          <FilterLanguages
-            languages={languages}
-            selectedLanguage={selectedLanguage}
+          <MoviesList />
+          <Pagination
+            handlePageChange={handlePageChange}
+            currentPage={currentPage}
+            totalPages={totalPages}
           />
-          <Search
-            searchQuery={searchQuery}
-            handleSearchInputChange={handleSearchInputChange}
-          />
-        </div>
-        <MoviesList />
-        <Pagination
-          handlePageChange={handlePageChange}
-          currentPage={currentPage}
-          totalPages={totalPages}
-        />
         </>
       )}
-      </div>
+    </div>
   );
 };
 
