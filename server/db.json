@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "email": "kirrus@gmail.com",
+      "password": "12345",
+      "name": "Kir",
+      "id": 1
+    },
+    {
+      "email": "gdg@gfdg.com",
+      "password": "34",
+      "name": "Кирило",
+      "id": 2
+    },
+    {
+      "name": "Mariya",
+      "email": "slatesolutions.dev@gmail.com",
+      "password": "mar",
+      "id": 3
+    }
+  ]
+}

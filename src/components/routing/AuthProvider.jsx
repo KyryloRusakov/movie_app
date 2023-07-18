@@ -7,11 +7,11 @@ const AuthProvider = ({children}) => {
    const navigate = useNavigate();
    const location = useLocation();
    let currentLocation = location.pathname;
-   console.log(location);
+  //  console.log(location);
    
    useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    console.log(storedUser);
+    // console.log(storedUser);
     if (storedUser) {
       setUser(JSON.parse(storedUser));
       navigate(currentLocation);
