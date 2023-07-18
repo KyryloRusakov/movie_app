@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "./../components/Header";
 import MoviesList from "../components/MoviesList";
@@ -68,12 +68,9 @@ const Movies = () => {
     fetchLanguages();
   }, [dispatch, currentPage, searchQuery, selectedGenre, selectedLanguage]);
 
-  const handleSearchInputChange = useCallback(
-    (event) => {
-      dispatch(setSearchQuery(event.target.value));
-    },
-    [dispatch]
-  );
+  const handleSearchInputChange = (event) => {
+    dispatch(setSearchQuery(event.target.value));
+  };
 
   const handlePageChange = (page) => {
     dispatch(setCurrentPage(page));

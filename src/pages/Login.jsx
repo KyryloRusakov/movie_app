@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from './../components/hook/useAuth';
 
 const Login = () => {
   const {
@@ -9,15 +10,14 @@ const Login = () => {
     handleSubmit,
   } = useForm();
 
+  const navigate = useNavigate();
+  const {signin} = useAuth();
+
   const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+    const user = data.email;
+
+    signin(user, () => navigate("/movies"), true);
   };
-
-  const navigate = useNavigate()
-
-  function loginHandler() {
-    navigate("/movies");
-  }
 
   return (
     <div className="container">
@@ -50,7 +50,7 @@ const Login = () => {
           <Link className="form-link" to="/signup">
             Sign In
           </Link>
-          <button className="form-btn" type="submit" onClick={loginHandler}>
+          <button className="form-btn" type="submit" >
             Log In
           </button>
         </div>
