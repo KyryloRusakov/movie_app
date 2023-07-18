@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from './../components/hook/useAuth';
 
 const Login = () => {
@@ -11,25 +11,16 @@ const Login = () => {
   } = useForm();
 
   const navigate = useNavigate();
-  const location = useLocation();
   const {signin} = useAuth();
 
-  const fromPage = location.state?.from?.pathname || '/';
-  
   const onSubmit = (data) => {
     const user = data.email;
 
-    signin(user, () => navigate("/movies"));
+    signin(user, () => navigate("/movies"), true);
   };
-
-
-  // function loginHandler() {
-  //   navigate("/movies");
-  // }
 
   return (
     <div className="container">
-      {fromPage}
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-control-wrapper">
           <label>

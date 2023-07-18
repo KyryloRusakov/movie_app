@@ -23,8 +23,22 @@ const Router = () => {
             </RequireAuth>
           }
         />
-        <Route path="/movie/:id" element={<MovieDetail />} />
-        <Route path="/favorites" element={<Favorites />} />
+        <Route
+          path="/movie/:id"
+          element={
+            <RequireAuth>
+              <MovieDetail />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/favorites"
+          element={
+            <RequireAuth>
+              <Favorites />
+            </RequireAuth>
+          }
+        />
         <Route path="*" element={<Error />} />
       </Routes>
     </AuthProvider>
