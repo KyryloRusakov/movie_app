@@ -1,7 +1,8 @@
-import React from 'react';
+import {React, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from './../components/hook/useAuth';
+import axios from "axios";
 
 const Login = () => {
   const {
@@ -13,6 +14,8 @@ const Login = () => {
   const navigate = useNavigate();
   const {signin} = useAuth();
 
+   const [error, setError] = useState("");
+
   // const onSubmit = (data) => {
   //   // const user = data.email;
 
@@ -20,23 +23,29 @@ const Login = () => {
   // };
 
    const onSubmit = async (data) => {
+     const { name, email, password } = data;
      try {
-       const response = await fetch("http://localhost:3001/users", {
-         method: "POST",
-         headers: {
-           "Content-Type": "application/json",
-         },
-         body: JSON.stringify(data),
-        });
-        console.log(data);
+       const response = await axios.get("http://localhost:3001/users");
+       const users = response.data;
 
-       if (response.ok) {
+       const user = users.find(
+         (user) =>
+           user.name === name &&
+           user.email === email &&
+           user.password === password
+       );
+
+      signin({name, email}, () => navigate("/movies"), true);
+
+       if (user) {
          navigate("/movies");
        } else {
-         console.error("Error creating user:", response.statusText);
+         setError("Неправильный email или пароль. Попробуйте снова.");
        }
      } catch (error) {
-       console.error("Error creating user:", error);
+       setError(
+         "Произошла ошибка при проверке учетных данных. Попробуйте позже."
+       );
      }
    };
 
@@ -79,6 +88,7 @@ const Login = () => {
             {errors.password && <span>{errors.password.message}</span>}
           </label>
         </div>
+        {error && <div className="form-error">{error}</div>}
         <div className="form-footer">
           <Link className="form-link" to="/signup">
             Sign In

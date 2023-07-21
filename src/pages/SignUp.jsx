@@ -13,9 +13,26 @@ const SignUp = () => {
   const navigate = useNavigate();
   const { signin } = useAuth();
 
-  const onSubmit = (data) => {
-    const user = data.firstName;
-    signin(user, () => navigate("/movies"));
+  const onSubmit = async (data) => {
+    try {
+      const response = await fetch("http://localhost:3001/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      console.log(data);
+
+      if (response.ok) {
+        navigate("/movies");
+      } else {
+        console.error("Error creating user:", response.statusText);
+      }
+       signin(data.name, () => navigate("/movies"), true);
+    } catch (error) {
+      console.error("Error creating user:", error);
+    }
   };
 
   return (
@@ -26,12 +43,12 @@ const SignUp = () => {
             First Name:
             <input
               className="form-input"
-              {...register("firstName", {
+              {...register("name", {
                 required: "Enter your name",
               })}
             />
-            {errors.firstName && (
-              <span className="form-error">{errors.firstName.message}</span>
+            {errors.name && (
+              <span className="form-error">{errors.name.message}</span>
             )}
           </label>
         </div>
@@ -154,10 +171,7 @@ const SignUp = () => {
           </label>
         </div>
         <div className="form-footer">
-          <button
-            className="form-btn"
-            type="submit"
-          >
+          <button className="form-btn" type="submit">
             Sign Up
           </button>
         </div>
