@@ -8,6 +8,7 @@ import Favorites from "../../pages/Favorites";
 import Error from "../../pages/Error";
 import { RequireAuth } from "./RequireAuth";
 import AuthProvider from "./AuthProvider";
+import Profile from '../../pages/Profile';
 
 const Router = () => {
   return (
@@ -36,6 +37,14 @@ const Router = () => {
           element={
             <RequireAuth>
               <Favorites />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <RequireAuth>
+              <Profile />
             </RequireAuth>
           }
         />

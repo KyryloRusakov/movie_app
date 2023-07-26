@@ -1,0 +1,112 @@
+{
+  "users": [
+    {
+      "email": "kirrus@gmail.com",
+      "password": "12345",
+      "name": "Kir",
+      "id": 1
+    },
+    {
+      "email": "gdg@gfdg.com",
+      "password": "34",
+      "name": "Кирило",
+      "id": 2
+    },
+    {
+      "name": "Mariya",
+      "email": "slatesolutions.dev@gmail.com",
+      "password": "mar",
+      "id": 3
+    },
+    {
+      "name": "Кирило",
+      "email": "slatesolutions.dev@gmail.com",
+      "password": "mar",
+      "id": 4
+    },
+    {
+      "name": "mariyavlas9@gmail.com",
+      "email": "slatesolutions.dev@gmail.com",
+      "password": "pop",
+      "id": 5
+    },
+    {
+      "name": "mariyavlas9@gmail.com",
+      "email": "slatesolutions.dev+enduser@gmail.com",
+      "password": "12345",
+      "id": 6
+    },
+    {
+      "firstName": "Кирило",
+      "lastName": "Русаков",
+      "username": "rusakov",
+      "date": "2023-07-21",
+      "sex": "on",
+      "email": "kirillrusakov199821@gmail.com",
+      "password": "kirrus",
+      "confirmPassword": "kirrus",
+      "id": 7
+    },
+    {
+      "name": "j",
+      "email": "gdg@gfdg.com",
+      "password": "55555",
+      "id": 8
+    },
+    {
+      "name": "Kyrylo",
+      "lastName": "Rusakov",
+      "username": "rusakov",
+      "date": "2023-07-20",
+      "sex": "on",
+      "email": "kyrylo.rusakov@nixs.com",
+      "password": "1024",
+      "confirmPassword": "1024",
+      "id": 9
+    },
+    {
+      "name": "Mariya",
+      "lastName": "Rusakov",
+      "username": "marisha",
+      "date": "2023-07-22",
+      "sex": "on",
+      "email": "mariya.vlasenko.1998@mail.ru",
+      "password": "margo",
+      "confirmPassword": "margo",
+      "id": 10
+    },
+    {
+      "name": "Kate",
+      "lastName": "Rusakova",
+      "username": "katerinarus",
+      "date": "2023-07-26",
+      "sex": "female",
+      "email": "kate@gmail.com",
+      "password": "kate",
+      "confirmPassword": "kate",
+      "id": 11
+    },
+    {
+      "name": "j",
+      "lastName": "Русаков",
+      "username": "devanalys",
+      "date": "2023-07-20",
+      "sex": "male",
+      "email": "slatesolutions.dev+enduser@gmail.com",
+      "password": "kate",
+      "confirmPassword": "kate",
+      "id": 12
+    },
+    {
+      "name": "kekes",
+      "lastName": "kekevich",
+      "username": "kuksik",
+      "date": "2023-07-29",
+      "sex": "male",
+      "email": "keka@gmail.com",
+      "password": "keks",
+      "confirmPassword": "keks",
+      "id": 13
+    }
+  ]
+}
