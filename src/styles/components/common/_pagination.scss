@@ -42,3 +42,12 @@
   font-weight: 500;
   font-size: 18px;
 }
+
+.pagination-btn{
+  border: none;
+
+  &:disabled{
+    background-color: rgb(207, 207, 207);
+    pointer-events: none;
+  }
+}

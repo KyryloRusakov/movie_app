@@ -15,11 +15,11 @@ const Header = () => {
           Favorites
         </Link>
         {user ? (
-          <Link to="/profile" className="header-nav">
+          <Link to="/profile" className="header-nav icon-user">
             <span>{user.name}</span>
           </Link>
         ) : (
-          <Link to="/" className="header-nav">
+          <Link to="/" className="header-nav icon-user">
             <span>Log In</span>
           </Link>
         )}

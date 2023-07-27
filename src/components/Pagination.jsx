@@ -83,13 +83,13 @@ const Pagination = ({ handlePageChange, currentPage, totalPages }) => {
 
   return (
     <div className="pagination">
-      <a
+      <button
         onClick={() => {
           handlePageChange(currentPage - 1);
         }}
         //Also works:  onClick={handlePageChange.bind(null, currentPage - 1)}
         disabled={currentPage === 1}
-        className="pagination-link"
+        className="pagination-link pagination-btn"
       >
         <svg
           viewBox="0 0 24 24"
@@ -98,19 +98,19 @@ const Pagination = ({ handlePageChange, currentPage, totalPages }) => {
         >
           <path d="M9.79461 17.2946C9.40534 16.9053 9.405 16.2743 9.79384 15.8846L13.67 12L9.79384 8.11538C9.405 7.72569 9.40534 7.09466 9.79461 6.70538C10.1842 6.31581 10.8158 6.31581 11.2054 6.70538L16.5 12L11.2054 17.2946C10.8158 17.6842 10.1842 17.6842 9.79461 17.2946Z"></path>
         </svg>
-      </a>
+      </button>
       {renderPageNumbers()}
-      <a
+      <button
         onClick={() => {
           handlePageChange(currentPage + 1);
         }}
         disabled={currentPage === totalPages}
-        className="pagination-link"
+        className="pagination-link pagination-btn"
       >
         <svg viewBox="0 0 24 24" fill="#282828" className="pagination-icon">
           <path d="M9.79461 17.2946C9.40534 16.9053 9.405 16.2743 9.79384 15.8846L13.67 12L9.79384 8.11538C9.405 7.72569 9.40534 7.09466 9.79461 6.70538C10.1842 6.31581 10.8158 6.31581 11.2054 6.70538L16.5 12L11.2054 17.2946C10.8158 17.6842 10.1842 17.6842 9.79461 17.2946Z"></path>
         </svg>
-      </a>
+      </button>
     </div>
   );
 };

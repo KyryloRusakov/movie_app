@@ -26,7 +26,12 @@ export const fetchMovies = createAsyncThunk(
 
     try {
       const response = await axios.get(apiUrl);
-      return response.data.results;
+      let totalPages = response.data.total_pages;
+      const movies = response.data.results;
+      if (totalPages > 500) {
+        totalPages = 500;
+      }
+      return { movies, totalPages };
     } catch (error) {
       console.error("Ошибка при получении фильмов:", error);
       throw error;
@@ -46,7 +51,6 @@ const moviesSlice = createSlice({
     selectedLanguage: "",
     searchQuery: "",
     currentPage: 1,
-    totalPages: 500,
     movieDetail: null,
     favorites: JSON.parse(localStorage.getItem("favorites")) || [],
   },
@@ -95,6 +99,7 @@ const moviesSlice = createSlice({
       })
       .addCase(fetchMovies.fulfilled, (state, action) => {
         state.movies = action.payload;
+        state.totalPages = action.payload.totalPages;
         state.loading = false;
       })
       .addCase(fetchMovies.rejected, (state, action) => {

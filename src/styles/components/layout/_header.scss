@@ -15,12 +15,29 @@
 }
 
 .header-nav{
+  position: relative;
   font-size: 16px;
   color: #fff;
   text-transform: uppercase;
+
+  &:after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -12px;
+    width: 4px;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 50%;
+  }
+
+  &:last-child:after{
+    content: none;
+  }
 }
 
 .header-links{
   display: flex;
-  gap: 16px;
+  gap: 36px;
 }
