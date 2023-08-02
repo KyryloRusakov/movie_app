@@ -66,4 +66,8 @@
   width: 100%;
   min-height: 450px;
   object-fit: cover;
+
+  .movie-detail &{
+    width: unset;
+  }
 }

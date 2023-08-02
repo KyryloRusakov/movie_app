@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-const Search = ({ searchQuery, handleSearchInputChange }) => {
+function Search({ searchQuery, handleSearchInputChange }) {
   return (
     <div className="movies-search-wrapper">
       <label htmlFor="search" className="movies-label">
@@ -16,6 +16,6 @@ const Search = ({ searchQuery, handleSearchInputChange }) => {
       />
     </div>
   );
-};
+}
 
-export default Search
+export default Search;

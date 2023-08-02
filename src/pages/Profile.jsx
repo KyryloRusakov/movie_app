@@ -1,11 +1,11 @@
-import { React, useState, useEffect } from "react";
-import Header from "./../components/Header";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "./../components/hook/useAuth";
-import axios from "axios";
-import { useForm } from "react-hook-form";
+import { React, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import { useAuth } from '../components/hook/useAuth';
+import Header from '../components/Header';
 
-const Profile = () => {
+function Profile() {
   const {
     register,
     formState: { errors },
@@ -19,56 +19,48 @@ const Profile = () => {
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-    // Извлекаем данные текущего пользователя из локального хранилища
-    const storedUser = localStorage.getItem("user");
+    const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const user = JSON.parse(storedUser);
-      // setUserData(user);
-      
-      fetchUserData(user.email); // Загружаем данные пользователя с JSON-сервера
-    }
 
+      fetchUserData(user.email);
+    }
   }, []);
 
-   const fetchUserData = async (email) => {
-     try {
-       const response = await axios.get("http://localhost:3001/users");
-       const users = response.data;
+  const fetchUserData = async (email) => {
+    try {
+      const response = await axios.get('http://localhost:3001/users');
+      const users = response.data;
 
-       // Находим пользователя с той же электронной почтой из локального хранилища
-       const user = users.find((user) => user.email === email);
-       console.log(user);
+      const user = users.find((user) => user.email === email);
 
-       if (user) {
-        //  setUserData(user);
-        setUserId(user.id); // Устанавливаем идентификатор пользователя
+      if (user) {
+        setUserId(user.id);
 
-        setValue("name", user.name);
-        setValue("lastName", user.lastName);
-        setValue("username", user.username);
-        setValue("date", user.date);
-        setValue("sex", user.sex);
-        setValue("email", user.email);
-        setValue("password", user.password);
-        setValue("confirmPassword", user.password);
-       }
-     } catch (error) {
-       console.error("Error fetching user data:", error);
-     }
-   };
+        setValue('name', user.name);
+        setValue('lastName', user.lastName);
+        setValue('username', user.username);
+        setValue('date', user.date);
+        setValue('sex', user.sex);
+        setValue('email', user.email);
+        setValue('password', user.password);
+        setValue('confirmPassword', user.password);
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
 
   const onSubmit = async (data) => {
     try {
-      // Отправляем обновленные данные на JSON-сервер, используя идентификатор пользователя
       await axios.put(`http://localhost:3001/users/${userId}`, data);
-      alert("Update")
     } catch (error) {
-      console.error("Error saving user data:", error);
+      console.error('Error saving user data:', error);
     }
   };
 
   const logout = () => {
-    signout(() => navigate("/movies"));
+    signout(() => navigate('/movies'));
   };
 
   return (
@@ -76,7 +68,9 @@ const Profile = () => {
       <Header />
       <div className="profile">
         <div className="profile-info">
-          <span className="profile-title">You can change your personal data or logout</span>
+          <span className="profile-title">
+            You can change your personal data or logout
+          </span>
           <div className="logout">
             <button className="form-btn" type="submit" onClick={logout}>
               Log Out
@@ -89,8 +83,8 @@ const Profile = () => {
               First Name:
               <input
                 className="form-input"
-                {...register("name", {
-                  required: "Enter your name",
+                {...register('name', {
+                  required: 'Enter your name',
                 })}
               />
               {errors.name && (
@@ -103,8 +97,8 @@ const Profile = () => {
               Last Name:
               <input
                 className="form-input"
-                {...register("lastName", {
-                  required: "Enter your last name",
+                {...register('lastName', {
+                  required: 'Enter your last name',
                 })}
               />
               {errors.lastName && (
@@ -117,12 +111,12 @@ const Profile = () => {
               Username:
               <input
                 className="form-input"
-                {...register("username", {
+                {...register('username', {
                   required: true,
                   pattern: {
                     value: /^[a-z][a-zA-Z0-9_.]*$/,
                     message:
-                      'Логин должен начинаться с маленькой буквы и содержать только буквы, цифры или символы "." или "_"',
+                      'The login must start with a lowercase letter and contain only letters, numbers, or "." or "_"',
                   },
                 })}
               />
@@ -137,8 +131,8 @@ const Profile = () => {
               <input
                 className="form-input"
                 type="date"
-                {...register("date", {
-                  required: "Chose date",
+                {...register('date', {
+                  required: 'Chose date',
                 })}
               />
               {errors.date && (
@@ -153,8 +147,8 @@ const Profile = () => {
               <input
                 className="form-input"
                 type="radio"
-                {...register("sex", {
-                  required: "Choose sex",
+                {...register('sex', {
+                  required: 'Choose sex',
                 })}
                 value="male"
               />
@@ -164,8 +158,8 @@ const Profile = () => {
               <input
                 className="form-input"
                 type="radio"
-                {...register("sex", {
-                  required: "Chose sex",
+                {...register('sex', {
+                  required: 'Chose sex',
                 })}
                 value="female"
               />
@@ -179,8 +173,8 @@ const Profile = () => {
               Email:
               <input
                 className="form-input"
-                {...register("email", {
-                  required: "Enter your email",
+                {...register('email', {
+                  required: 'Enter your email',
                 })}
               />
               {errors.email && (
@@ -193,8 +187,8 @@ const Profile = () => {
               Password:
               <input
                 className="form-input"
-                {...register("password", {
-                  required: "Enter your password",
+                {...register('password', {
+                  required: 'Enter your password',
                 })}
               />
               {errors.password && (
@@ -207,8 +201,8 @@ const Profile = () => {
               Confirm Password:
               <input
                 className="form-input"
-                {...register("confirmPassword", {
-                  required: "Confirm your password",
+                {...register('confirmPassword', {
+                  required: 'Confirm your password',
                 })}
               />
               {errors.confirmPassword && (
@@ -227,6 +221,6 @@ const Profile = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Profile;

@@ -1,9 +1,9 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { BASE_URL } from "../constants/constants.js";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { BASE_URL } from '../constants/constants.js';
 
 export const fetchMovies = createAsyncThunk(
-  "movies/fetchMovies",
+  'movies/fetchMovies',
   async (params) => {
     const {
       API_KEY,
@@ -33,26 +33,26 @@ export const fetchMovies = createAsyncThunk(
       }
       return { movies, totalPages };
     } catch (error) {
-      console.error("Ошибка при получении фильмов:", error);
+      console.log('Error while getting movies:', error);
       throw error;
     }
-  }
+  },
 );
 
 const moviesSlice = createSlice({
-  name: "movies",
+  name: 'movies',
   initialState: {
     movies: [],
     loading: false,
     error: null,
     genres: [],
     languages: [],
-    selectedGenre: "",
-    selectedLanguage: "",
-    searchQuery: "",
+    selectedGenre: '',
+    selectedLanguage: '',
+    searchQuery: '',
     currentPage: 1,
     movieDetail: null,
-    favorites: JSON.parse(localStorage.getItem("favorites")) || [],
+    favorites: JSON.parse(localStorage.getItem('favorites')) || [],
   },
   reducers: {
     setGenres: (state, action) => {
@@ -78,14 +78,14 @@ const moviesSlice = createSlice({
     },
     addToFavorites: (state, action) => {
       const updatedFavorites = [...state.favorites, action.payload];
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
       state.favorites = updatedFavorites;
     },
     removeFromFavorites: (state, action) => {
       const updatedFavorites = state.favorites.filter(
-        (favMovie) => favMovie.id !== action.payload.id
+        (favMovie) => favMovie.id !== action.payload.id,
       );
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
       state.favorites = updatedFavorites;
     },
     setLoading: (state, action) => {
