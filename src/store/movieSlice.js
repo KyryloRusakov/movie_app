@@ -33,7 +33,7 @@ export const fetchMovies = createAsyncThunk(
       }
       return { movies, totalPages };
     } catch (error) {
-      console.log('Error while getting movies:', error);
+      console.error('Error while getting movies:', error);
       throw error;
     }
   },
