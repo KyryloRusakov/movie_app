@@ -1,9 +1,8 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import placeholder from '../assets/placeholder.jpg';
 import { IMAGE_BASE_URL } from '../constants/constants';
 
-function Movie({ movie }) {
+const Movie = ({ movie }) => {
   const posterPath = movie.poster_path
     ? IMAGE_BASE_URL + movie.poster_path
     : placeholder;
@@ -16,6 +15,6 @@ function Movie({ movie }) {
       </Link>
     </li>
   );
-}
+};
 
 export default Movie;

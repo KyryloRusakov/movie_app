@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useAuth } from '../components/hook/useAuth';
 import Header from '../components/Header';
 
-function Profile() {
+const Profile = () => {
   const {
     register,
     formState: { errors },
@@ -221,6 +221,6 @@ function Profile() {
       </div>
     </div>
   );
-}
+};
 
 export default Profile;

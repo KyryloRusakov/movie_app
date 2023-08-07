@@ -1,8 +1,7 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import Movie from './Movie';
 
-function MovieList() {
+const MovieList = () => {
   const moviesData = useSelector((state) => state.movies.movies);
   const movies = moviesData?.movies || [];
 
@@ -31,6 +30,6 @@ function MovieList() {
       ))}
     </ul>
   );
-}
+};
 
 export default MovieList;

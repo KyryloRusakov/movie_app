@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { API_KEY, IMAGE_BASE_URL } from '../constants/constants';
+import { IMAGE_BASE_URL } from '../constants/constants';
 import Loader from '../components/Loader';
 import Header from '../components/Header';
 import {
@@ -10,7 +10,7 @@ import {
   removeFromFavorites,
 } from '../store/movieSlice';
 
-function MovieDetail() {
+const MovieDetail = () => {
   const dispatch = useDispatch();
   const { movieDetail, favorites, genres } = useSelector(
     (state) => state.movies,
@@ -23,7 +23,7 @@ function MovieDetail() {
     const fetchMovie = async () => {
       try {
         setLoadingPoster(true);
-        const apiUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`;
+        const apiUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}`;
 
         const response = await fetch(apiUrl);
         const data = await response.json();
@@ -46,7 +46,7 @@ function MovieDetail() {
   };
 
   if (!movieDetail) {
-    return <div>Загрузка...</div>;
+    return <div>Loading...</div>;
   }
 
   return (
@@ -110,6 +110,6 @@ function MovieDetail() {
       )}
     </div>
   );
-}
+};
 
 export default MovieDetail;

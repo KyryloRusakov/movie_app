@@ -13,10 +13,10 @@ import {
   setSearchQuery,
   setCurrentPage,
 } from '../store/movieSlice';
-import { API_KEY, BASE_URL } from '../constants/constants';
+import { BASE_URL } from '../constants/constants';
 import Loader from '../components/Loader';
 
-function Movies() {
+const Movies = () => {
   const dispatch = useDispatch();
   const {
     genres,
@@ -32,7 +32,6 @@ function Movies() {
   useEffect(() => {
     dispatch(
       fetchMovies({
-        API_KEY,
         currentPage,
         searchQuery,
         selectedGenre,
@@ -43,24 +42,24 @@ function Movies() {
     const fetchGenres = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/genre/movie/list?api_key=${API_KEY}`,
+          `${BASE_URL}/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}`,
         );
         const data = await response.json();
         dispatch(setGenres(data.genres));
       } catch (error) {
-        console.error('Ошибка при получении списка жанров:', error);
+        console.error('Error while getting list of genres:', error);
       }
     };
 
     const fetchLanguages = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/configuration/languages?api_key=${API_KEY}`,
+          `${BASE_URL}/configuration/languages?api_key=${process.env.REACT_APP_API_KEY}`,
         );
         const data = await response.json();
         dispatch(setLanguages(data));
       } catch (error) {
-        console.error('Ошибка при получении языков:', error);
+        console.error('Error while getting languages:', error);
       }
     };
 
@@ -104,6 +103,6 @@ function Movies() {
       )}
     </div>
   );
-}
+};
 
 export default Movies;

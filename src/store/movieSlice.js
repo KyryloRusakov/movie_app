@@ -6,22 +6,21 @@ export const fetchMovies = createAsyncThunk(
   'movies/fetchMovies',
   async (params) => {
     const {
-      API_KEY,
       currentPage,
       searchQuery,
       selectedGenre,
       selectedLanguage,
     } = params;
-    let apiUrl = `${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${currentPage}`;
+    let apiUrl = `${BASE_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&page=${currentPage}`;
 
     if (searchQuery) {
-      apiUrl = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${searchQuery}&page=${currentPage}`;
+      apiUrl = `${BASE_URL}/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${searchQuery}&page=${currentPage}`;
     } else if (selectedGenre && selectedLanguage) {
-      apiUrl = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${selectedGenre}&with_original_language=${selectedLanguage}&page=${currentPage}`;
+      apiUrl = `${BASE_URL}/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_genres=${selectedGenre}&with_original_language=${selectedLanguage}&page=${currentPage}`;
     } else if (selectedGenre) {
-      apiUrl = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${selectedGenre}&page=${currentPage}`;
+      apiUrl = `${BASE_URL}/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_genres=${selectedGenre}&page=${currentPage}`;
     } else if (selectedLanguage) {
-      apiUrl = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_original_language=${selectedLanguage}&page=${currentPage}`;
+      apiUrl = `${BASE_URL}/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_original_language=${selectedLanguage}&page=${currentPage}`;
     }
 
     try {

@@ -1,6 +1,4 @@
-import React from 'react';
-
-function Pagination({ handlePageChange, currentPage, totalPages }) {
+const Pagination = ({ handlePageChange, currentPage, totalPages }) => {
   const renderPageNumbers = () => {
     const pageNumbers = [];
 
@@ -109,6 +107,6 @@ function Pagination({ handlePageChange, currentPage, totalPages }) {
       </button>
     </div>
   );
-}
+};
 
 export default Pagination;

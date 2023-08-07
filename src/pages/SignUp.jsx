@@ -1,9 +1,8 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../components/hook/useAuth';
 import UserForm from '../components/UserForm';
 
-function SignUp() {
+const SignUp = () => {
   const navigate = useNavigate();
   const { signin } = useAuth();
 
@@ -33,6 +32,6 @@ function SignUp() {
       <UserForm onSubmit={onSubmit} btnName="Sign Up" />
     </div>
   );
-}
+};
 
 export default SignUp;
