@@ -1,6 +1,5 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { setSelectedGenre } from "../../store/movieSlice";
+import { useDispatch } from 'react-redux';
+import { setSelectedGenre } from '../../store/movieSlice';
 
 const Filter = ({ selectedGenre, genres }) => {
   const dispatch = useDispatch();

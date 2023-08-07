@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Header from "./../components/Header";
-import MoviesList from "../components/MoviesList";
-import FilterGenres from "../components/Filters/FilterGenres";
-import FilterLanguages from "../components/Filters/FilterLanguages";
-import Search from "./../components/Search";
-import Pagination from "./../components/Pagination";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Header from '../components/Header';
+import MoviesList from '../components/MoviesList';
+import FilterGenres from '../components/Filters/FilterGenres';
+import FilterLanguages from '../components/Filters/FilterLanguages';
+import Search from '../components/Search';
+import Pagination from '../components/Pagination';
 import {
   fetchMovies,
   setGenres,
   setLanguages,
   setSearchQuery,
   setCurrentPage,
-} from "./../store/movieSlice";
-import { API_KEY, BASE_URL } from "../constants/constants";
-import Loader from "../components/Loader";
+} from '../store/movieSlice';
+import { BASE_URL } from '../constants/constants';
+import Loader from '../components/Loader';
 
 const Movies = () => {
   const dispatch = useDispatch();
@@ -32,35 +32,34 @@ const Movies = () => {
   useEffect(() => {
     dispatch(
       fetchMovies({
-        API_KEY,
         currentPage,
         searchQuery,
         selectedGenre,
         selectedLanguage,
-      })
+      }),
     );
 
     const fetchGenres = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/genre/movie/list?api_key=${API_KEY}`
+          `${BASE_URL}/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}`,
         );
         const data = await response.json();
         dispatch(setGenres(data.genres));
       } catch (error) {
-        console.error("Ошибка при получении списка жанров:", error);
+        console.error('Error while getting list of genres:', error);
       }
     };
 
     const fetchLanguages = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/configuration/languages?api_key=${API_KEY}`
+          `${BASE_URL}/configuration/languages?api_key=${process.env.REACT_APP_API_KEY}`,
         );
         const data = await response.json();
         dispatch(setLanguages(data));
       } catch (error) {
-        console.error("Ошибка при получении языков:", error);
+        console.error('Error while getting languages:', error);
       }
     };
 

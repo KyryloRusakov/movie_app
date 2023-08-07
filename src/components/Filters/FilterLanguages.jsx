@@ -1,6 +1,5 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { setSelectedLanguage } from "../../store/movieSlice";
+import { useDispatch } from 'react-redux';
+import { setSelectedLanguage } from '../../store/movieSlice';
 
 const Filter = ({ selectedLanguage, languages }) => {
   const dispatch = useDispatch();

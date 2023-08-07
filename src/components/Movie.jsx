@@ -1,16 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import placeholder from "../public/img/placeholder.jpg";
+import { Link } from 'react-router-dom';
+import placeholder from '../assets/placeholder.jpg';
+import { IMAGE_BASE_URL } from '../constants/constants';
 
 const Movie = ({ movie }) => {
-  const imageBaseUrl = "https://image.tmdb.org/t/p/w300";
   const posterPath = movie.poster_path
-    ? imageBaseUrl + movie.poster_path
+    ? IMAGE_BASE_URL + movie.poster_path
     : placeholder;
 
   return (
     <li className="movies-item">
-      {/* {placeholder} */}
       <Link to={`/movie/${movie.id}`}>
         <img className="movies-img" src={posterPath} alt={movie.title} />
         <span className="movies-title">{movie.title}</span>

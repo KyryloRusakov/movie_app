@@ -96,17 +96,6 @@
       "password": "kate",
       "confirmPassword": "kate",
       "id": 12
-    },
-    {
-      "name": "kekes",
-      "lastName": "kekevich",
-      "username": "kuksik",
-      "date": "2023-07-29",
-      "sex": "male",
-      "email": "keka@gmail.com",
-      "password": "keks",
-      "confirmPassword": "keks",
-      "id": 13
     }
   ]
 }

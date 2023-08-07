@@ -1,8 +1,8 @@
-import {React, useState } from 'react';
-import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from './../components/hook/useAuth';
-import axios from "axios";
+import { React, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useAuth } from '../components/hook/useAuth';
 
 const Login = () => {
   const {
@@ -12,42 +12,33 @@ const Login = () => {
   } = useForm();
 
   const navigate = useNavigate();
-  const {signin} = useAuth();
+  const { signin } = useAuth();
 
-   const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
-  // const onSubmit = (data) => {
-  //   // const user = data.email;
+  const onSubmit = async (data) => {
+    const { name, email, password } = data;
+    try {
+      const response = await axios.get('http://localhost:3001/users');
+      const users = response.data;
 
-  //   // signin(user, () => navigate("/movies"), true);
-  // };
+      const user = users.find(
+        (user) => user.name === name
+           && user.email === email
+           && user.password === password,
+      );
 
-   const onSubmit = async (data) => {
-     const { name, email, password } = data;
-     try {
-       const response = await axios.get("http://localhost:3001/users");
-       const users = response.data;
+      signin({ name, email }, () => navigate('/movies'), true);
 
-       const user = users.find(
-         (user) =>
-           user.name === name &&
-           user.email === email &&
-           user.password === password
-       );
-
-      signin({name, email}, () => navigate("/movies"), true);
-
-       if (user) {
-         navigate("/movies");
-       } else {
-         setError("Неправильный email или пароль. Попробуйте снова.");
-       }
-     } catch (error) {
-       setError(
-         "Произошла ошибка при проверке учетных данных. Попробуйте позже."
-       );
-     }
-   };
+      if (user) {
+        navigate('/movies');
+      } else {
+        setError('Wrong email or password. Please, try again.');
+      }
+    } catch (error) {
+      setError('An error occurred while validating credentials. Please, try later.');
+    }
+  };
 
   return (
     <div className="container">
@@ -57,7 +48,7 @@ const Login = () => {
             Name:
             <input
               className="form-input"
-              {...register("name", {
+              {...register('name', {
                 required: true,
               })}
             />
@@ -69,7 +60,7 @@ const Login = () => {
             Email:
             <input
               className="form-input"
-              {...register("email", {
+              {...register('email', {
                 required: true,
               })}
             />
@@ -81,7 +72,7 @@ const Login = () => {
             Password:
             <input
               className="form-input"
-              {...register("password", {
+              {...register('password', {
                 required: true,
               })}
             />
@@ -100,6 +91,6 @@ const Login = () => {
       </form>
     </div>
   );
-}
+};
 
-export default Login
+export default Login;

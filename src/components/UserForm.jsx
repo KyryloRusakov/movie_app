@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import axios from "axios";
+import { useForm } from 'react-hook-form';
 
 const UserForm = ({ onSubmit, btnName }) => {
   const {
@@ -16,8 +14,8 @@ const UserForm = ({ onSubmit, btnName }) => {
           First Name:
           <input
             className="form-input"
-            {...register("name", {
-              required: "Enter your name",
+            {...register('name', {
+              required: 'Enter your name',
             })}
           />
           {errors.name && (
@@ -30,8 +28,8 @@ const UserForm = ({ onSubmit, btnName }) => {
           Last Name:
           <input
             className="form-input"
-            {...register("lastName", {
-              required: "Enter your last name",
+            {...register('lastName', {
+              required: 'Enter your last name',
             })}
           />
           {errors.lastName && (
@@ -44,12 +42,12 @@ const UserForm = ({ onSubmit, btnName }) => {
           Username:
           <input
             className="form-input"
-            {...register("username", {
+            {...register('username', {
               required: true,
               pattern: {
                 value: /^[a-z][a-zA-Z0-9_.]*$/,
                 message:
-                  'Логин должен начинаться с маленькой буквы и содержать только буквы, цифры или символы "." или "_"',
+                  'The login must start with a lowercase letter and contain only letters, numbers, or "." or "_"',
               },
             })}
           />
@@ -64,8 +62,8 @@ const UserForm = ({ onSubmit, btnName }) => {
           <input
             className="form-input"
             type="date"
-            {...register("date", {
-              required: "Chose date",
+            {...register('date', {
+              required: 'Chose date',
             })}
           />
           {errors.date && (
@@ -80,8 +78,8 @@ const UserForm = ({ onSubmit, btnName }) => {
           <input
             className="form-input"
             type="radio"
-            {...register("sex", {
-              required: "Choose sex",
+            {...register('sex', {
+              required: 'Choose sex',
             })}
             value="male"
           />
@@ -91,8 +89,8 @@ const UserForm = ({ onSubmit, btnName }) => {
           <input
             className="form-input"
             type="radio"
-            {...register("sex", {
-              required: "Chose sex",
+            {...register('sex', {
+              required: 'Chose sex',
             })}
             value="female"
           />
@@ -106,8 +104,8 @@ const UserForm = ({ onSubmit, btnName }) => {
           Email:
           <input
             className="form-input"
-            {...register("email", {
-              required: "Enter your email",
+            {...register('email', {
+              required: 'Enter your email',
             })}
           />
           {errors.email && (
@@ -120,8 +118,8 @@ const UserForm = ({ onSubmit, btnName }) => {
           Password:
           <input
             className="form-input"
-            {...register("password", {
-              required: "Enter your password",
+            {...register('password', {
+              required: 'Enter your password',
             })}
           />
           {errors.password && (
@@ -134,8 +132,8 @@ const UserForm = ({ onSubmit, btnName }) => {
           Confirm Password:
           <input
             className="form-input"
-            {...register("confirmPassword", {
-              required: "Confirm your password",
+            {...register('confirmPassword', {
+              required: 'Confirm your password',
             })}
           />
           {errors.confirmPassword && (

@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useAuth } from "./../components/hook/useAuth";
+import { Link } from 'react-router-dom';
+import { useAuth } from './hook/useAuth';
+import logo from '../assets/logo.svg';
 
 const Header = () => {
   const { user } = useAuth();
@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <div className="header">
       <Link to="/movies" className="header-logo">
-        Movies
+        <img src={logo} alt="logo" />
       </Link>
       <div className="header-links">
         <Link to="/favorites" className="header-nav">
