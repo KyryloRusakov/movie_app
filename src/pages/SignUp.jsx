@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../components/hook/useAuth';
-import UserForm from '../components/UserForm';
+import { useAuth } from 'components/hook/useAuth';
+import UserForm from 'components/UserForm';
 
 const SignUp = () => {
   const navigate = useNavigate();

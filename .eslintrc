@@ -1,6 +1,7 @@
 {
   "env": { "browser": true, "es6": true, "node": true },
   "extends": ["airbnb", "react-app", "react-app/jest"],
+  "plugins": ["react"],
   "rules": {
     "no-console": "off",
     "quotes": ["error", "single"],
@@ -26,7 +27,11 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx"]
+        "extensions": [".js", ".jsx"],
+        "moduleDirectory": [
+          "node_modules",
+          "src"
+        ]
       }
     }
   }

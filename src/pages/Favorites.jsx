@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import Header from '../components/Header';
-import MoviesFavoriteList from '../components/MoviesFavoriteList';
+import Header from 'components/Header';
+import MoviesFavoriteList from 'components/MoviesFavoriteList';
 
 const Favorites = () => {
   const { favorites } = useSelector((state) => state.movies);

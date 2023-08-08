@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
-import Login from '../../pages/Login';
-import SignUp from '../../pages/SignUp';
-import Movies from '../../pages/Movies';
-import MovieDetail from '../../pages/MovieDetail';
-import Favorites from '../../pages/Favorites';
-import Error from '../../pages/Error';
+import Login from 'pages/Login';
+import SignUp from 'pages/SignUp';
+import Movies from 'pages/Movies';
+import MovieDetail from 'pages/MovieDetail';
+import Favorites from 'pages/Favorites';
+import Error from 'pages/Error';
+import Profile from 'pages/Profile';
 import AuthProvider from './AuthProvider';
-import Profile from '../../pages/Profile';
 
 const Router = () => (
   <AuthProvider>
