@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Header from '../components/Header';
-import MoviesList from '../components/MoviesList';
-import FilterGenres from '../components/Filters/FilterGenres';
-import FilterLanguages from '../components/Filters/FilterLanguages';
-import Search from '../components/Search';
-import Pagination from '../components/Pagination';
+import Header from 'components/Header';
+import MoviesList from 'components/MoviesList';
+import FilterGenres from 'components/Filters/FilterGenres';
+import FilterLanguages from 'components/Filters/FilterLanguages';
+import Search from 'components/Search';
+import Pagination from 'components/Pagination';
 import {
   fetchMovies,
   setGenres,

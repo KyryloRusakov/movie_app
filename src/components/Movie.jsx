@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import placeholder from '../assets/placeholder.jpg';
-import { IMAGE_BASE_URL } from '../constants/constants';
+import placeholder from 'assets/placeholder.jpg';
+import { IMAGE_BASE_URL } from 'constants/constants';
 
 const Movie = ({ movie }) => {
   const posterPath = movie.poster_path

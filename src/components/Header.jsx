@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
+import logo from 'assets/logo.svg';
 import { useAuth } from './hook/useAuth';
-import logo from '../assets/logo.svg';
 
 const Header = () => {
   const { user } = useAuth();
