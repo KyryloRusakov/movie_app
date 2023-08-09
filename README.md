@@ -2,7 +2,7 @@
 
 Web site that allows you to track movies, their ratings, and other information. You can also add favorite movies to your own collection.
 
-## Enviroments:
+## Environments:
 
   Node version 14.18.1
   npm version 6.14.15
@@ -17,9 +17,13 @@ Web site that allows you to track movies, their ratings, and other information. 
 
 ## Available Scripts
 
-First install dependecies:
+First install dependencies:
 
 ### `npm ci`
+
+Runs the app and server simultaneously:
+
+### `npm run dev`
 
 In the project directory, you can run:
 

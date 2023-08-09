@@ -2,8 +2,7 @@ import { React, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { useAuth } from '../components/hook/useAuth';
-import Header from '../components/Header';
+import { useAuth } from 'hook/useAuth';
 
 const Profile = () => {
   const {

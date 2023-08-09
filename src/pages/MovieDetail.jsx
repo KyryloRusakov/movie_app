@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { IMAGE_BASE_URL } from 'constants/constants';
 import Loader from 'components/Loader';
-import Header from 'components/Header';
 import {
   setMovieDetail,
   addToFavorites,
