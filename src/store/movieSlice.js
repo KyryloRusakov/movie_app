@@ -27,8 +27,8 @@ export const fetchMovies = createAsyncThunk(
       const response = await axios.get(apiUrl);
       let totalPages = response.data.total_pages;
       const movies = response.data.results;
-      if (totalPages > 500) {
-        totalPages = 500;
+      if (totalPages > 100) {
+        totalPages = 100;
       }
       return { movies, totalPages };
     } catch (error) {

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Header from 'components/Header';
 import MoviesList from 'components/MoviesList';
 import FilterGenres from 'components/Filters/FilterGenres';
 import FilterLanguages from 'components/Filters/FilterLanguages';
@@ -77,7 +76,6 @@ const Movies = () => {
 
   return (
     <div className="container">
-      <Header />
       <div className="movies-filter">
         <FilterGenres genres={genres} selectedGenre={selectedGenre} />
         <FilterLanguages

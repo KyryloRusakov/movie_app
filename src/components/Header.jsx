@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import logo from 'assets/logo.svg';
-import { useAuth } from './hook/useAuth';
+import { useAuth } from 'hook/useAuth';
 
 const Header = () => {
   const { user } = useAuth();
 
   return (
-    <div className="header">
+    <header className="container header">
       <Link to="/movies" className="header-logo">
         <img src={logo} alt="logo" />
       </Link>
@@ -24,8 +24,8 @@ const Header = () => {
           </Link>
         )}
       </div>
-    </div>
+    </header>
   );
 };
 
-export default Header;
+export { Header };

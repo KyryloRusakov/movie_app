@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useAuth } from 'components/hook/useAuth';
+import { useAuth } from 'hook/useAuth';
 
 const Login = () => {
   const {
@@ -24,8 +24,8 @@ const Login = () => {
 
       const user = users.find(
         (user) => user.name === name
-           && user.email === email
-           && user.password === password,
+          && user.email === email
+          && user.password === password,
       );
 
       signin({ name, email }, () => navigate('/movies'), true);
@@ -36,7 +36,9 @@ const Login = () => {
         setError('Wrong email or password. Please, try again.');
       }
     } catch (error) {
-      setError('An error occurred while validating credentials. Please, try later.');
+      setError(
+        'An error occurred while validating credentials. Please, try later.',
+      );
     }
   };
 
