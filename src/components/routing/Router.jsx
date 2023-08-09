@@ -6,18 +6,21 @@ import MovieDetail from 'pages/MovieDetail';
 import Favorites from 'pages/Favorites';
 import Error from 'pages/Error';
 import Profile from 'pages/Profile';
+import { Layout } from 'components/Layout';
 import AuthProvider from './AuthProvider';
 
 const Router = () => (
   <AuthProvider>
     <Routes>
-      <Route exact path="/" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/movies" element={<Movies />} />
-      <Route path="/movie/:id" element={<MovieDetail />} />
-      <Route path="/favorites" element={<Favorites />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="*" element={<Error />} />
+      <Route path="/" element={<Login />} />
+      <Route path="signup" element={<SignUp />} />
+      <Route path="/" element={<Layout />}>
+        <Route path="movies" element={<Movies />} />
+        <Route path="movie/:id" element={<MovieDetail />} />
+        <Route path="favorites" element={<Favorites />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="*" element={<Error />} />
+      </Route>
     </Routes>
   </AuthProvider>
 );

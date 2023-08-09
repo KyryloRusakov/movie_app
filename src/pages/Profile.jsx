@@ -65,7 +65,6 @@ const Profile = () => {
 
   return (
     <div className="container">
-      <Header />
       <div className="profile">
         <div className="profile-info">
           <span className="profile-title">

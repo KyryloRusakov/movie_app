@@ -51,7 +51,6 @@ const MovieDetail = () => {
 
   return (
     <div className="container">
-      <Header />
       {loadingPoster ? (
         <Loader />
       ) : (

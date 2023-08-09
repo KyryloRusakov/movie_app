@@ -77,7 +77,6 @@ const Movies = () => {
 
   return (
     <div className="container">
-      <Header />
       <div className="movies-filter">
         <FilterGenres genres={genres} selectedGenre={selectedGenre} />
         <FilterLanguages
