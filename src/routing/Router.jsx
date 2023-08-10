@@ -1,25 +1,30 @@
-import { Routes, Route } from 'react-router-dom';
-import Login from 'pages/Login';
-import SignUp from 'pages/SignUp';
-import Movies from 'pages/Movies';
-import MovieDetail from 'pages/MovieDetail';
-import Favorites from 'pages/Favorites';
-import Error from 'pages/Error';
-import Profile from 'pages/Profile';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { HomePage } from 'pages/HomePage';
+import { LoginPage } from 'pages/LoginPage';
+import { SignUpPage } from 'pages/SignUpPage';
+import { MoviesPage } from 'pages/MoviesPage';
+import { SeriesPage } from 'pages/SeriesPage';
+import { MovieDetailPage } from 'pages/MovieDetailPage';
+import { FavoritesPage } from 'pages/FavoritesPage';
+import { ProfilePage } from 'pages/ProfilePage';
+import { NotFoundPage } from 'pages/NotFoundPage';
 import { Layout } from 'components/Layout';
-import AuthProvider from './AuthProvider';
+import { AuthProvider } from './AuthProvider';
 
 const Router = () => (
   <AuthProvider>
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="signup" element={<SignUp />} />
+      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignUpPage />} />
       <Route path="/" element={<Layout />}>
-        <Route path="movies" element={<Movies />} />
-        <Route path="movie/:id" element={<MovieDetail />} />
-        <Route path="favorites" element={<Favorites />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="*" element={<Error />} />
+        <Route index element={<HomePage />} />
+        <Route path="movies" element={<MoviesPage />} />
+        <Route path="series" element={<SeriesPage />} />
+        <Route path="movie/:id" element={<MovieDetailPage />} />
+        <Route path="favorites" element={<FavoritesPage />} />
+        <Route path="profile" element={<ProfilePage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   </AuthProvider>

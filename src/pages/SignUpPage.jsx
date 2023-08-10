@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from 'hook/useAuth';
 import UserForm from 'components/UserForm';
 
-const SignUp = () => {
+const SignUpPage = () => {
   const navigate = useNavigate();
   const { signin } = useAuth();
 
@@ -34,4 +34,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export { SignUpPage };

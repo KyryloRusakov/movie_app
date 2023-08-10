@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import MoviesList from 'components/MoviesList';
-import FilterGenres from 'components/Filters/FilterGenres';
-import FilterLanguages from 'components/Filters/FilterLanguages';
+import FilterGenres from 'components/filters/FilterGenres';
+import FilterLanguages from 'components/filters/FilterLanguages';
 import Search from 'components/Search';
 import Pagination from 'components/Pagination';
 import {
@@ -15,7 +15,7 @@ import {
 import { BASE_URL } from '../constants/constants';
 import Loader from '../components/Loader';
 
-const Movies = () => {
+const MoviesPage = () => {
   const dispatch = useDispatch();
   const {
     genres,
@@ -103,4 +103,4 @@ const Movies = () => {
   );
 };
 
-export default Movies;
+export { MoviesPage };

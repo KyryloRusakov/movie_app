@@ -7,10 +7,16 @@ const Header = () => {
 
   return (
     <header className="container header">
-      <Link to="/movies" className="header-logo">
+      <Link to="/" className="header-logo">
         <img src={logo} alt="logo" />
       </Link>
       <div className="header-links">
+        <Link to="/movies" className="header-nav">
+          Movies
+        </Link>
+        <Link to="/series" className="header-nav">
+          Series
+        </Link>
         <Link to="/favorites" className="header-nav">
           Favorites
         </Link>

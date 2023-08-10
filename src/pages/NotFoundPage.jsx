@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const Error = () => (
+const NotFoundPage = () => (
   <div className="container">
     <div className="error">
       <div className="error-title">Page not found</div>
@@ -11,4 +11,4 @@ const Error = () => (
   </div>
 );
 
-export default Error;
+export { NotFoundPage };

@@ -9,7 +9,7 @@ import {
   removeFromFavorites,
 } from '../store/movieSlice';
 
-const MovieDetail = () => {
+const MovieDetailPage = () => {
   const dispatch = useDispatch();
   const { movieDetail, favorites, genres } = useSelector(
     (state) => state.movies,
@@ -110,4 +110,4 @@ const MovieDetail = () => {
   );
 };
 
-export default MovieDetail;
+export { MovieDetailPage };
