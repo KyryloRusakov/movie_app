@@ -14,7 +14,6 @@ import { AuthProvider } from './AuthProvider';
 const Router = () => (
   <AuthProvider>
     <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/" element={<Layout />}>
