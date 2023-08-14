@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import MoviesFavoriteList from 'components/MoviesFavoriteList';
 
-const Favorites = () => {
+const FavoritesPage = () => {
   const { favorites } = useSelector((state) => state.movies);
 
   return (
@@ -16,4 +16,4 @@ const Favorites = () => {
   );
 };
 
-export default Favorites;
+export { FavoritesPage };

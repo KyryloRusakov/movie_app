@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from 'hook/useAuth';
 
-const Login = () => {
+const LoginPage = () => {
   const {
     register,
     formState: { errors },
@@ -28,10 +28,10 @@ const Login = () => {
           && user.password === password,
       );
 
-      signin({ name, email }, () => navigate('/movies'), true);
+      signin({ name, email }, () => navigate('/'), true);
 
       if (user) {
-        navigate('/movies');
+        navigate('/');
       } else {
         setError('Wrong email or password. Please, try again.');
       }
@@ -95,4 +95,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export { LoginPage };

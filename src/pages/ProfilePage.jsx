@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useAuth } from 'hook/useAuth';
 
-const Profile = () => {
+const ProfilePage = () => {
   const {
     register,
     formState: { errors },
@@ -221,4 +221,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export { ProfilePage };
