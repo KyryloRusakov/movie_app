@@ -1,92 +1,83 @@
-import { React, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { useAuth } from 'hook/useAuth';
+import { useFormik } from 'formik';
+import { loginSchema } from 'schemas';
 
 const LoginPage = () => {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
-
   const navigate = useNavigate();
-  const { signin } = useAuth();
 
-  const [error, setError] = useState('');
+  const onSubmit = async (values, actions) => {
+    actions.resetForm();
 
-  const onSubmit = async (data) => {
-    const { name, email, password } = data;
-    try {
-      const response = await axios.get('http://localhost:3001/users');
-      const users = response.data;
-
-      const user = users.find(
-        (user) => user.name === name
-          && user.email === email
-          && user.password === password,
-      );
-
-      signin({ name, email }, () => navigate('/'), true);
-
-      if (user) {
-        navigate('/');
-      } else {
-        setError('Wrong email or password. Please, try again.');
-      }
-    } catch (error) {
-      setError(
-        'An error occurred while validating credentials. Please, try later.',
-      );
-    }
+    navigate('/');
   };
+
+  const {
+    values,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    errors,
+    touched,
+    isSubmitting,
+  } = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: loginSchema,
+    onSubmit,
+  });
 
   return (
     <div className="container">
-      <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-control-wrapper">
-          <label>
-            Name:
-            <input
-              className="form-input"
-              {...register('name', {
-                required: true,
-              })}
-            />
-            {errors.name && <span>{errors.name.message}</span>}
-          </label>
-        </div>
+      <form onSubmit={handleSubmit} className="form">
         <div className="form-control-wrapper">
           <label>
             Email:
             <input
-              className="form-input"
-              {...register('email', {
-                required: true,
-              })}
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              id="email"
+              type="email"
+              placeholder="Enter your email"
+              className={
+                errors.email && touched.email
+                  ? 'form-input invalid'
+                  : 'form-input'
+              }
             />
-            {errors.email && <span>{errors.email.message}</span>}
           </label>
+          {errors.email && touched.email && (
+            <span className="form-error">{errors.email}</span>
+          )}
         </div>
         <div className="form-control-wrapper">
           <label>
             Password:
             <input
-              className="form-input"
-              {...register('password', {
-                required: true,
-              })}
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              id="password"
+              type="password"
+              placeholder="Enter your password"
+              className={
+                errors.password && touched.password
+                  ? 'form-input invalid'
+                  : 'form-input'
+              }
             />
-            {errors.password && <span>{errors.password.message}</span>}
           </label>
+          {errors.password && touched.password && (
+            <span className="form-error">{errors.password}</span>
+          )}
         </div>
-        {error && <div className="form-error">{error}</div>}
         <div className="form-footer">
           <Link className="form-link" to="/signup">
             Sign In
           </Link>
-          <button className="form-btn" type="submit">
+          <button disabled={isSubmitting} className="form-btn" type="submit">
             Log In
           </button>
         </div>

@@ -1,25 +1,58 @@
-import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
+import { signupSchema } from 'schemas';
 
-const UserForm = ({ onSubmit, btnName }) => {
+const UserForm = ({ btnName }) => {
+  const navigate = useNavigate();
+
+  const onSubmit = async (values, actions) => {
+    actions.resetForm();
+
+    navigate('/');
+  };
+
   const {
-    register,
-    formState: { errors },
+    values,
+    handleBlur,
+    handleChange,
     handleSubmit,
-  } = useForm();
+    errors,
+    touched,
+    isSubmitting,
+  } = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      date: '',
+      sex: '',
+      password: '',
+      confirmPassword: '',
+    },
+    validationSchema: signupSchema,
+    onSubmit,
+  });
 
   return (
-    <form className="form" onSubmit={handleSubmit(onSubmit)}>
+    <form className="form" onSubmit={handleSubmit}>
       <div className="form-control-wrapper">
         <label>
           First Name:
           <input
-            className="form-input"
-            {...register('name', {
-              required: 'Enter your name',
-            })}
+            value={values.firstName}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            id="firstName"
+            type="text"
+            placeholder="Enter your first name"
+            className={
+              errors.firstName && touched.firstName
+                ? 'form-input invalid'
+                : 'form-input'
+            }
           />
-          {errors.name && (
-            <span className="form-error">{errors.name.message}</span>
+          {errors.firstName && touched.firstName && (
+            <span className="form-error">{errors.firstName}</span>
           )}
         </label>
       </div>
@@ -27,32 +60,20 @@ const UserForm = ({ onSubmit, btnName }) => {
         <label>
           Last Name:
           <input
-            className="form-input"
-            {...register('lastName', {
-              required: 'Enter your last name',
-            })}
+            value={values.lastName}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            id="lastName"
+            type="text"
+            placeholder="Enter your last name"
+            className={
+              errors.lastName && touched.lastName
+                ? 'form-input invalid'
+                : 'form-input'
+            }
           />
-          {errors.lastName && (
-            <span className="form-error">{errors.lastName.message}</span>
-          )}
-        </label>
-      </div>
-      <div className="form-control-wrapper">
-        <label>
-          Username:
-          <input
-            className="form-input"
-            {...register('username', {
-              required: true,
-              pattern: {
-                value: /^[a-z][a-zA-Z0-9_.]*$/,
-                message:
-                  'The login must start with a lowercase letter and contain only letters, numbers, or "." or "_"',
-              },
-            })}
-          />
-          {errors.username && (
-            <span className="form-error">{errors.username.message}</span>
+          {errors.lastName && touched.lastName && (
+            <span className="form-error">{errors.lastName}</span>
           )}
         </label>
       </div>
@@ -60,56 +81,75 @@ const UserForm = ({ onSubmit, btnName }) => {
         <label>
           Date of birth:
           <input
-            className="form-input"
+            value={values.date}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            id="date"
             type="date"
-            {...register('date', {
-              required: 'Chose date',
-            })}
+            placeholder="Select your date of birth"
+            className={
+              errors.date && touched.date ? 'form-input invalid' : 'form-input'
+            }
           />
-          {errors.date && (
-            <span className="form-error">{errors.date.message}</span>
+          {errors.date && touched.date && (
+            <span className="form-error">{errors.date}</span>
           )}
         </label>
       </div>
-      <div className="form-radiobtn-wrapper">
+      <div className="form-radiobtn-wrapper" id="sex">
         Your sex:
         <label className="form-radiobtn">
           Male
           <input
-            className="form-input"
-            type="radio"
-            {...register('sex', {
-              required: 'Choose sex',
-            })}
             value="male"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            name="sex"
+            type="radio"
+            checked={values.sex === 'male'}
+            className={
+              errors.male && touched.male ? 'form-input invalid' : 'form-input'
+            }
           />
         </label>
         <label className="form-radiobtn">
           Female
           <input
-            className="form-input"
-            type="radio"
-            {...register('sex', {
-              required: 'Chose sex',
-            })}
             value="female"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            name="sex"
+            type="radio"
+            checked={values.sex === 'female'}
+            className={
+              errors.female && touched.female
+                ? 'form-input invalid'
+                : 'form-input'
+            }
           />
-          {errors.sex && (
-            <span className="form-error">{errors.sex.message}</span>
-          )}
         </label>
+        {errors.sex && touched.sex && (
+          <span className="form-error">{errors.sex}</span>
+        )}
       </div>
       <div className="form-control-wrapper">
         <label>
           Email:
           <input
-            className="form-input"
-            {...register('email', {
-              required: 'Enter your email',
-            })}
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+            className={
+              errors.email && touched.email
+                ? 'form-input invalid'
+                : 'form-input'
+            }
           />
-          {errors.email && (
-            <span className="form-error">{errors.email.message}</span>
+          {errors.email && touched.email && (
+            <span className="form-error">{errors.email}</span>
           )}
         </label>
       </div>
@@ -117,13 +157,20 @@ const UserForm = ({ onSubmit, btnName }) => {
         <label>
           Password:
           <input
-            className="form-input"
-            {...register('password', {
-              required: 'Enter your password',
-            })}
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            id="password"
+            type="password"
+            placeholder="Enter your password"
+            className={
+              errors.password && touched.password
+                ? 'form-input invalid'
+                : 'form-input'
+            }
           />
-          {errors.password && (
-            <span className="form-error">{errors.password.message}</span>
+          {errors.password && touched.password && (
+            <span className="form-error">{errors.password}</span>
           )}
         </label>
       </div>
@@ -131,18 +178,25 @@ const UserForm = ({ onSubmit, btnName }) => {
         <label>
           Confirm Password:
           <input
-            className="form-input"
-            {...register('confirmPassword', {
-              required: 'Confirm your password',
-            })}
+            value={values.confirmPassword}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            id="confirmPassword"
+            type="password"
+            placeholder="Confirm your password"
+            className={
+              errors.confirmPassword && touched.confirmPassword
+                ? 'form-input invalid'
+                : 'form-input'
+            }
           />
-          {errors.confirmPassword && (
-            <span className="form-error">{errors.confirmPassword.message}</span>
+          {errors.confirmPassword && touched.confirmPassword && (
+            <span className="form-error">{errors.confirmPassword}</span>
           )}
         </label>
       </div>
       <div className="form-footer">
-        <button className="form-btn" type="submit">
+        <button disabled={isSubmitting} className="form-btn" type="submit">
           {btnName}
         </button>
       </div>
