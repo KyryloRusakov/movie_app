@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const regex = /^(?=.*[a-zA-Z])(?=.*\d).+$/;
+const PASSWORD_REGEX = /^(?=.*[a-zA-Z])(?=.*\d).+$/;
 
 const isAdult = (birthday) => {
   const ageDifMs = Date.now() - birthday;
@@ -16,7 +16,7 @@ export const loginSchema = yup.object().shape({
   password: yup
     .string()
     .min(5, 'Password must be at least 5 characters')
-    .matches(regex, {
+    .matches(PASSWORD_REGEX, {
       message: 'Password must have at least one digit and one letter.',
     })
     .required('Password is a required field'),
@@ -37,7 +37,7 @@ export const signupSchema = yup.object().shape({
   password: yup
     .string()
     .min(5, 'Password must be at least 5 characters')
-    .matches(regex, {
+    .matches(PASSWORD_REGEX, {
       message: 'Password must have at least one digit and one letter.',
     })
     .required('Password is a required field'),
