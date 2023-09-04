@@ -10,13 +10,10 @@ const UserForm = ({
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  console.log(dispatch(setLoggedIn()));
-
   const onSubmit = async (values, actions) => {
     actions.resetForm();
     dispatch(setLoggedIn());
     navigate('/');
-    console.log(dispatch(setLoggedIn()));
   };
 
   const {
