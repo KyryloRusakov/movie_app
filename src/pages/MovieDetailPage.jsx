@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { IMAGE_BASE_URL } from 'constants/constants';
+import { IMAGE_BASE_URL } from 'constants/api';
 import Loader from 'components/Loader';
 import {
   setMovieDetail,

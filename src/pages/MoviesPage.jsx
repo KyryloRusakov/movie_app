@@ -12,7 +12,7 @@ import {
   setSearchQuery,
   setCurrentPage,
 } from '../store/movieSlice';
-import { BASE_URL } from '../constants/constants';
+import { BASE_URL } from '../constants/api';
 import Loader from '../components/Loader';
 
 const MoviesPage = () => {

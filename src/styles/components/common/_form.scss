@@ -30,6 +30,10 @@
     height: auto;
     margin-bottom: 0;
   }
+
+  &.invalid{
+    border: 1px solid rgb(236, 12, 12);
+  }
 }
 
 .form-footer {
@@ -51,6 +55,10 @@
   .logout & {
     width: 300px;
   }
+
+  &:disabled{
+    opacity: 0.3;
+  }
 }
 
 .form-link {
@@ -64,7 +72,7 @@
 .form-radiobtn-wrapper {
   display: flex;
   gap: 8px;
-  margin-bottom: 30px;
+  margin-top: 24px;
 }
 
 .form-radiobtn {
@@ -79,7 +87,7 @@
 
 .form-error {
   display: inline-block;
-  color: rgb(255, 51, 51);
+  color: rgb(236, 12, 12);
 
   .form-radiobtn-wrapper & {
     white-space: nowrap;

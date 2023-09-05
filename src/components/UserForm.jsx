@@ -1,148 +1,75 @@
-import { useForm } from 'react-hook-form';
+import { useNavigate, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useFormik } from 'formik';
+import { setLoggedIn } from 'store/authSlice';
+import RadioButtons from './formControls/RadioButtons';
 
-const UserForm = ({ onSubmit, btnName }) => {
+const UserForm = ({
+  initialValues, validationSchema, btnName, formFields, signinBtn,
+}) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const onSubmit = async (values, actions) => {
+    actions.resetForm();
+    dispatch(setLoggedIn());
+    navigate('/');
+  };
+
   const {
-    register,
-    formState: { errors },
+    values,
+    handleBlur,
+    handleChange,
     handleSubmit,
-  } = useForm();
+    errors,
+    touched,
+    isSubmitting,
+  } = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit,
+  });
 
   return (
-    <form className="form" onSubmit={handleSubmit(onSubmit)}>
-      <div className="form-control-wrapper">
-        <label>
-          First Name:
-          <input
-            className="form-input"
-            {...register('name', {
-              required: 'Enter your name',
-            })}
-          />
-          {errors.name && (
-            <span className="form-error">{errors.name.message}</span>
+    <form className="form" onSubmit={handleSubmit}>
+      {formFields.map((field) => (
+        <div className="form-control-wrapper" key={field.id}>
+          <label>
+            {field.title}
+            <input
+              onChange={handleChange}
+              onBlur={handleBlur}
+              id={field.id}
+              type={field.type}
+              placeholder={field.placeholder}
+              className={
+                errors[field.id] && touched[field.id]
+                  ? 'form-input invalid'
+                  : 'form-input'
+              }
+            />
+            {errors[field.id] && touched[field.id] && (
+              <span className="form-error">{errors[field.id]}</span>
+            )}
+          </label>
+          {field.id === 'lastName' && (
+            <RadioButtons
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              values={values}
+              errors={errors}
+              touched={touched}
+            />
           )}
-        </label>
-      </div>
-      <div className="form-control-wrapper">
-        <label>
-          Last Name:
-          <input
-            className="form-input"
-            {...register('lastName', {
-              required: 'Enter your last name',
-            })}
-          />
-          {errors.lastName && (
-            <span className="form-error">{errors.lastName.message}</span>
-          )}
-        </label>
-      </div>
-      <div className="form-control-wrapper">
-        <label>
-          Username:
-          <input
-            className="form-input"
-            {...register('username', {
-              required: true,
-              pattern: {
-                value: /^[a-z][a-zA-Z0-9_.]*$/,
-                message:
-                  'The login must start with a lowercase letter and contain only letters, numbers, or "." or "_"',
-              },
-            })}
-          />
-          {errors.username && (
-            <span className="form-error">{errors.username.message}</span>
-          )}
-        </label>
-      </div>
-      <div className="form-control-wrapper">
-        <label>
-          Date of birth:
-          <input
-            className="form-input"
-            type="date"
-            {...register('date', {
-              required: 'Chose date',
-            })}
-          />
-          {errors.date && (
-            <span className="form-error">{errors.date.message}</span>
-          )}
-        </label>
-      </div>
-      <div className="form-radiobtn-wrapper">
-        Your sex:
-        <label className="form-radiobtn">
-          Male
-          <input
-            className="form-input"
-            type="radio"
-            {...register('sex', {
-              required: 'Choose sex',
-            })}
-            value="male"
-          />
-        </label>
-        <label className="form-radiobtn">
-          Female
-          <input
-            className="form-input"
-            type="radio"
-            {...register('sex', {
-              required: 'Chose sex',
-            })}
-            value="female"
-          />
-          {errors.sex && (
-            <span className="form-error">{errors.sex.message}</span>
-          )}
-        </label>
-      </div>
-      <div className="form-control-wrapper">
-        <label>
-          Email:
-          <input
-            className="form-input"
-            {...register('email', {
-              required: 'Enter your email',
-            })}
-          />
-          {errors.email && (
-            <span className="form-error">{errors.email.message}</span>
-          )}
-        </label>
-      </div>
-      <div className="form-control-wrapper">
-        <label>
-          Password:
-          <input
-            className="form-input"
-            {...register('password', {
-              required: 'Enter your password',
-            })}
-          />
-          {errors.password && (
-            <span className="form-error">{errors.password.message}</span>
-          )}
-        </label>
-      </div>
-      <div className="form-control-wrapper">
-        <label>
-          Confirm Password:
-          <input
-            className="form-input"
-            {...register('confirmPassword', {
-              required: 'Confirm your password',
-            })}
-          />
-          {errors.confirmPassword && (
-            <span className="form-error">{errors.confirmPassword.message}</span>
-          )}
-        </label>
-      </div>
+        </div>
+      ))}
       <div className="form-footer">
-        <button className="form-btn" type="submit">
+        {signinBtn && (
+          <Link className="form-link" to="/signup">
+            Sign In
+          </Link>
+        )}
+        <button disabled={isSubmitting} className="form-btn" type="submit">
           {btnName}
         </button>
       </div>
