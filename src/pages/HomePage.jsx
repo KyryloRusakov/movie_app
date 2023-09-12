@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { useAuth } from 'hook/useAuth';
 
 const HomePage = () => {
-  const [isAuth, setIsAuth] = useState(true);
+  const { isAuth } = useAuth();
 
   return isAuth ? (
     <div className="container" style={{ color: 'white', fontSize: '24px' }}>Home</div>

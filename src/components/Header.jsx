@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import logo from 'assets/logo.svg';
 import { useAuth } from 'hook/useAuth';
 
 const Header = () => {
-  const { user } = useAuth();
+  const { isAuth } = useAuth();
+  const { name } = useSelector((state) => state.user);
 
   return (
     <header className="container header">
@@ -20,9 +22,9 @@ const Header = () => {
         <Link to="/favorites" className="header-nav">
           Favorites
         </Link>
-        {user ? (
+        {isAuth ? (
           <Link to="/profile" className="header-nav icon-user">
-            <span>{user.name}</span>
+            <span>{name}</span>
           </Link>
         ) : (
           <Link to="/" className="header-nav icon-user">

@@ -1,21 +1,16 @@
-import { useNavigate, Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { setLoggedIn } from 'store/authSlice';
 import RadioButtons from './formControls/RadioButtons';
 
 const UserForm = ({
-  initialValues, validationSchema, btnName, formFields, signinBtn,
+  initialValues,
+  validationSchema,
+  btnName,
+  formFields,
+  signinBtn,
+  onSubmit,
+  isSubmitting,
 }) => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const onSubmit = async (values, actions) => {
-    actions.resetForm();
-    dispatch(setLoggedIn());
-    navigate('/');
-  };
-
   const {
     values,
     handleBlur,
@@ -23,7 +18,6 @@ const UserForm = ({
     handleSubmit,
     errors,
     touched,
-    isSubmitting,
   } = useFormik({
     initialValues,
     validationSchema,
