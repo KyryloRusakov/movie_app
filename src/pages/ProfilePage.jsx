@@ -1,8 +1,9 @@
 import { React, useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { useAuth } from 'hook/useAuth';
+import { removeUser } from 'store/userSlice';
 
 const ProfilePage = () => {
   const {
@@ -12,8 +13,8 @@ const ProfilePage = () => {
     setValue,
   } = useForm();
 
-  const { signout } = useAuth();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [userId, setUserId] = useState(null);
 
@@ -59,7 +60,8 @@ const ProfilePage = () => {
   };
 
   const logout = () => {
-    signout(() => navigate('/movies'));
+    dispatch(removeUser());
+    navigate('/');
   };
 
   return (

@@ -1,6 +1,11 @@
-import { useContext } from 'react';
-import { AuthContext } from 'routing/AuthProvider';
+import { useSelector } from 'react-redux';
 
 export function useAuth() {
-  return useContext(AuthContext);
+  const { email, name } = useSelector((state) => state.user);
+
+  return {
+    isAuth: !!email,
+    name,
+    email,
+  };
 }

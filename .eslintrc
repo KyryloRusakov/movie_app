@@ -22,7 +22,8 @@
     "react/react-in-jsx-scope": "off",
     "react/jsx-no-constructed-context-values": "off",
     "import/extensions": "off",
-    "react/jsx-filename-extension": "off"
+    "react/jsx-filename-extension": "off",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
   },
   "settings": {
     "import/resolver": {
