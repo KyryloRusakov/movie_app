@@ -24,7 +24,6 @@ const SignUpPage = () => {
   const handleRegister = (values, actions) => {
     setIsSubmitting(true);
     const auth = getAuth();
-    console.log(auth);
     createUserWithEmailAndPassword(auth, values.email, values.password)
       .then(({ user }) => {
         const profileUpdates = {
@@ -33,7 +32,6 @@ const SignUpPage = () => {
 
         return updateProfile(user, profileUpdates)
           .then(() => {
-            console.log(user);
             dispatch(
               setUser({
                 email: user.email,
