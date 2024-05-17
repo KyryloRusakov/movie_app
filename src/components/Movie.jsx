@@ -9,7 +9,7 @@ const Movie = ({ movie }) => {
 
   return (
     <li className="movies-item">
-      <Link to={`/movie/${movie.id}`}>
+      <Link to={`/movie_app/movie/${movie.id}`}>
         <img className="movies-img" src={posterPath} alt={movie.title} />
         <span className="movies-title">{movie.title}</span>
       </Link>

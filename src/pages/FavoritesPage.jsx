@@ -8,7 +8,7 @@ const FavoritesPage = () => {
     <div className="container">
       <h2 className="favorites-title">My Favorites</h2>
       {favorites.length === 0 ? (
-        <span>No favorite movies yet.</span>
+        <span className={{ color: "#fff" }}>No favorite movies yet.</span>
       ) : (
         <MoviesFavoriteList movies={favorites} />
       )}
