@@ -27,7 +27,7 @@ const Header = () => {
             <span>{name}</span>
           </NavLink>
         ) : (
-          <NavLink to="/movie_app" className="header-nav icon-user">
+          <NavLink to="/movie_app/login" className="header-nav icon-user">
             <span>Log In</span>
           </NavLink>
         )}
