@@ -10,9 +10,12 @@ const UserForm = ({
   signinBtn,
   onSubmit,
   isSubmitting,
+  inputValue,
+  userDataExists,
 }) => {
   const {
     values,
+    setValues,
     handleBlur,
     handleChange,
     handleSubmit,
@@ -23,6 +26,18 @@ const UserForm = ({
     validationSchema,
     onSubmit,
   });
+
+  if (userDataExists) {
+    initialValues.firstName = userDataExists.firstName;
+    initialValues.lastName = userDataExists.lastName;
+    initialValues.sex = userDataExists.sex;
+    initialValues.date = userDataExists.date;
+    initialValues.email = userDataExists.email;
+    initialValues.password = userDataExists.password;
+    initialValues.confirmPassword = userDataExists.confirmPassword;
+  }
+
+  // console.log(values);
 
   return (
     <form className="form" onSubmit={handleSubmit}>
@@ -36,6 +51,8 @@ const UserForm = ({
               id={field.id}
               type={field.type}
               placeholder={field.placeholder}
+              value={values[field.id]}
+              max={field.max}
               className={
                 errors[field.id] && touched[field.id]
                   ? 'form-input invalid'
@@ -59,7 +76,7 @@ const UserForm = ({
       ))}
       <div className="form-footer">
         {signinBtn && (
-          <Link className="form-link" to="/signup">
+          <Link className="form-link" to="/movie_app/signup">
             Sign In
           </Link>
         )}

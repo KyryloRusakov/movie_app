@@ -5,9 +5,11 @@ const HomePage = () => {
   const { isAuth } = useAuth();
 
   return isAuth ? (
-    <div className="container" style={{ color: 'white', fontSize: '24px' }}>Home</div>
+    <div className="container" style={{ color: 'white', fontSize: '24px' }}>
+      What&apos;s Popular
+    </div>
   ) : (
-    <Navigate to="/login" />
+    <Navigate to="/movie_app/login" />
   );
 };
 export { HomePage };
