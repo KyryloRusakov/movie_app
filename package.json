@@ -1,5 +1,5 @@
 {
-  "homapage": "https://KyryloRusakov.github.io/movie_app",
+  "homapage": "https://kyrylorusakov.github.io/movie_app",
   "name": "moviepetproj",
   "version": "0.1.0",
   "private": true,
@@ -26,15 +26,15 @@
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm start\"",
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "json-server -w server/db.json -p 3001",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix --color",
-    "prepare": "husky install",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "prepare": "husky install"
   },
   "browserslist": {
     "production": [
