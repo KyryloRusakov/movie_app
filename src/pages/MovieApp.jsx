@@ -1,4 +1,4 @@
-const NotFoundPage = () => (
+const MovieApp = () => (
   <div className="container">
     <div className="error">
       <div className="error-title">start</div>
@@ -6,4 +6,4 @@ const NotFoundPage = () => (
   </div>
 );
 
-export { NotFoundPage };
+export { MovieApp };

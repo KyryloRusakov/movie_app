@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { HomePage } from 'pages/HomePage';
 import { LoginPage } from 'pages/LoginPage';
 import { SignUpPage } from 'pages/SignUpPage';
+import { MovieApp } from 'pages/MovieApp';
 import { MoviesPage } from 'pages/MoviesPage';
 import { SeriesPage } from 'pages/SeriesPage';
 import { MovieDetailPage } from 'pages/MovieDetailPage';
