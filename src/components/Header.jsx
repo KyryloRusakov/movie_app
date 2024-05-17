@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import logo from 'assets/logo.svg';
 import { useAuth } from 'hook/useAuth';
@@ -9,27 +9,27 @@ const Header = () => {
 
   return (
     <header className="container header">
-      <Link to="/" className="header-logo">
+      <NavLink to="/movie_app" className="header-logo">
         <img src={logo} alt="logo" />
-      </Link>
+      </NavLink>
       <div className="header-links">
-        <Link to="/movies" className="header-nav">
+        <NavLink to="/movie_app/movies" className="header-nav">
           Movies
-        </Link>
-        <Link to="/series" className="header-nav">
+        </NavLink>
+        <NavLink to="/movie_app/series" className="header-nav">
           Series
-        </Link>
-        <Link to="/favorites" className="header-nav">
+        </NavLink>
+        <NavLink to="/movie_app/favorites" className="header-nav">
           Favorites
-        </Link>
+        </NavLink>
         {isAuth ? (
-          <Link to="/profile" className="header-nav icon-user">
+          <NavLink to="/movie_app/profile" className="header-nav icon-user">
             <span>{name}</span>
-          </Link>
+          </NavLink>
         ) : (
-          <Link to="/" className="header-nav icon-user">
+          <NavLink to="/movie_app" className="header-nav icon-user">
             <span>Log In</span>
-          </Link>
+          </NavLink>
         )}
       </div>
     </header>
