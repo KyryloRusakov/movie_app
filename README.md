@@ -2,6 +2,13 @@
 
 You can check site by clicking [https://kyrylorusakov.github.io/movie_app/](https://kyrylorusakov.github.io/movie_app/)
 
+# Credential
+
+- **Login: kirillrusakov199821@gmail.com**
+- **Password: 12345qwerty**
+
+# About
+
 Web site that allows you to track movies, their ratings, and other information. You can also add favorite movies to your own collection. In application you can register, login, logout and update your personal information. All these features provide Firebase.
 
 ## Environments:
