@@ -33,19 +33,20 @@ const LoginPage = () => {
               setUser({
                 email: user.email,
                 name: user.displayName,
+                id: user.uid,
               }),
             );
             actions.resetForm();
-            navigate('/');
+            navigate('/movie_app');
           })
-          .catch((error) => {
+          .catch(() => {
             setIsSubmitting(false);
-            setError(`Login error: ${error.message}`);
+            setError('Incorrect email or password');
           });
       })
-      .catch((error) => {
+      .catch(() => {
         setIsSubmitting(false);
-        setError(`Login error: ${error.message}`);
+        setError('Incorrect email or password');
       });
   };
 

@@ -16,9 +16,9 @@ const Router = () => (
     <Routes>
       <Route path="/movie_app/login" element={<LoginPage />} />
       <Route path="/movie_app/signup" element={<SignUpPage />} />
-      <Route path="/" element={<Layout />}>
+      <Route path="/movie_app" element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path="/movie_app/movies" element={<MoviesPage />} />
+        <Route index path="/movie_app/movies" element={<MoviesPage />} />
         <Route path="/movie_app/series" element={<SeriesPage />} />
         <Route path="/movie_app/movie/:id" element={<MovieDetailPage />} />
         <Route path="/movie_app/favorites" element={<FavoritesPage />} />

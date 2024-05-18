@@ -6,6 +6,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth';
+import { addDoc, collection } from 'firebase/firestore';
 import UserForm from 'components/UserForm';
 import { signupSchema } from 'schemas';
 import {
@@ -13,6 +14,7 @@ import {
   signinFormFields,
 } from 'constants/formFields';
 import { setUser } from 'store/userSlice';
+import { db } from '../firebase';
 
 const SignUpPage = () => {
   const [error, setError] = useState(null);
@@ -21,9 +23,26 @@ const SignUpPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleRegister = (values, actions) => {
+  const userCollection = collection(db, 'users');
+
+  const handleRegister = async (values, actions) => {
     setIsSubmitting(true);
     const auth = getAuth();
+
+    try {
+      await addDoc(userCollection, {
+        name: values.firstName,
+        lastName: values.lastName,
+        sex: values.sex,
+        date: values.date,
+        email: values.email,
+        password: values.password,
+        confirmPassword: values.confirmPassword,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+
     createUserWithEmailAndPassword(auth, values.email, values.password)
       .then(({ user }) => {
         const profileUpdates = {
@@ -38,17 +57,26 @@ const SignUpPage = () => {
                 name: user.displayName,
               }),
             );
+            console.log(values);
             actions.resetForm();
-            navigate('/');
+            navigate('/movie_app');
           })
           .catch((error) => {
             setIsSubmitting(false);
-            setError(`Sign in error: ${error.message}`);
+            if (error.code === 'auth/email-already-in-use') {
+              setError('The email address is already in use');
+            } else {
+              setError(`Sign in error: ${error.message}`);
+            }
           });
       })
       .catch((error) => {
         setIsSubmitting(false);
-        setError(`Sign in error: ${error.message}`);
+        if (error.code === 'auth/email-already-in-use') {
+          setError('The email address is already in use');
+        } else {
+          setError(`Sign in error: ${error.message}`);
+        }
       });
   };
   return (
@@ -62,6 +90,7 @@ const SignUpPage = () => {
         onSubmit={handleRegister}
         isSubmitting={isSubmitting}
         signinBtn={false}
+        userDataExists={false}
       />
     </div>
   );
