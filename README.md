@@ -1,6 +1,8 @@
 # MoviePetProj
 
-Web site that allows you to track movies, their ratings, and other information. You can also add favorite movies to your own collection.
+You can check site by clicking [https://kyrylorusakov.github.io/movie_app/](https://kyrylorusakov.github.io/movie_app/)
+
+Web site that allows you to track movies, their ratings, and other information. You can also add favorite movies to your own collection. In application you can register, login, logout and update your personal information. All these features provide Firebase.
 
 ## Environments:
 
@@ -14,6 +16,7 @@ Web site that allows you to track movies, their ratings, and other information. 
 - **React Hook Form**
 - **SASS**
 - **Redux**
+- **Firebase**
 
 ## Available Scripts
 
